@@ -9,19 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class UtilBikeInput {
-    private UtilBikeInput(){}
+public final class UtilBikeInput {
 
-    static Scanner sc = new Scanner(System.in);
-    private static int topSpeed, groundClearance, wheelBase, maxTorque, price,bikeId;
-    private static String bikeModel, bodyType, instrumentConsole, seatType;
-    public static int getBikeId(){
+     Scanner sc = new Scanner(System.in);
+    private int topSpeed, groundClearance, wheelBase, maxTorque, price;
+    private  String bikeModel, bodyType, instrumentConsole, seatType;
+    public  static int getBikeId(){
+        Scanner sc = new Scanner(System.in);
         System.out.println("Enter bike Id:");
-        bikeId = sc.nextInt();
-        return bikeId;
+        return sc.nextInt();
     }
 
-    private static void getBikeDetails() {
+    private  void getBikeDetails() {
         System.out.println("Enter Bike Model \t:");
         bikeModel = sc.next();
         System.out.println("Enter Top Speed \t:");
@@ -42,7 +41,7 @@ public class UtilBikeInput {
         seatType = sc.next();
     }
 
-    public static MBike getMBikeDetails() {
+    public  MBike getMBikeDetails() {
         getBikeDetails();
         System.out.println("Enter Mileage \t:");
         int mileage = sc.nextInt();
@@ -61,7 +60,7 @@ public class UtilBikeInput {
         return new MBike(topSpeed, groundClearance, wheelBase, maxTorque, price, bikeModel, bodyType, instrumentConsole, seatType, mileage, noOfCylinders, engineType, displacement, coolingSystem, fuelSupply, gearBox);
     }
 
-    public static EBike getEBikeDetails() {
+    public  EBike getEBikeDetails() {
         getBikeDetails();
         System.out.println("Enter Range Eco \t:");
         int rangeEco = sc.nextInt();
@@ -89,8 +88,8 @@ public class UtilBikeInput {
         bikeDetails.add(sc.nextInt());
         return bikeDetails;
     }
-
-    public static EnumBikeTypes getBikeType() {
+    public  static EnumBikeTypes getBikeType() {
+        Scanner sc = new Scanner(System.in);
         for(EnumBikeTypes bikeTypes :EnumBikeTypes.values())
             System.out.println(bikeTypes.ordinal()+1+" "+bikeTypes);
         int a = sc.nextInt();

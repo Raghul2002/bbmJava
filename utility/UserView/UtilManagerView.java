@@ -5,7 +5,7 @@ import bbm.model.account.Manager;
 
 import java.util.List;
 
-public class UtilManagerView {
+public final class UtilManagerView {
     private UtilManagerView(){}
     private static void managerHeader(){
         divider();

@@ -1,19 +1,19 @@
 package bbm.authentication;
 
 import bbm.UserAuthentication;
-import bbm.database.Database;
-import bbm.database.IDatabase;
+import bbm.dataManager.DataManager;
+import bbm.dataManager.IDataManager;
 import bbm.model.account.Owner;
 import bbm.model.account.User;
 
 import java.util.List;
 
 public class OwnerAuthenticator implements UserAuthentication {
-    public User authenticate(List<String> loginCredentials){
-        IDatabase db = Database.getInstance();
-        List<Owner> ownerList = db.getOwnerList();
+    public User authenticate(String userName,String password){
+        IDataManager dataManager = new DataManager();
+        List<Owner> ownerList = dataManager.getOwnerList();
         for (Owner i : ownerList)
-            if( i.getUserName().equals(loginCredentials.get(0)) && i.getPassword().equals(loginCredentials.get(1)))
+            if( i.getUserName().equals(userName) && i.getPassword().equals(password))
                 return i;
         return null;
     }

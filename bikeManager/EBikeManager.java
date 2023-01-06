@@ -7,21 +7,20 @@ import bbm.model.bike.Bike;
 import bbm.model.bike.BikeStatus;
 import bbm.model.bike.EBike;
 import bbm.dataManager.IDataManager;
+import bbm.model.bike.MBike;
 import bbm.utility.UtilBikeView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EBikeManager implements BikeManager {
+public class EBikeManager implements BikeManager<EBike> {
     IDataManager dataManager = new DataManager();
+
     @Override
-    public boolean addBike(Bike bike, Manager manager) {
-        if (bike instanceof EBike) {
-            dataManager.addBike((EBike) bike, manager);
-            return true;
-        } else
-            return false;
+    public void addBike(EBike bike, Manager manager) {
+        dataManager.addBike(bike, manager);
     }
+
 
     @Override
     public boolean removeBike(int bikeId, Manager manager) {
@@ -54,17 +53,19 @@ public class EBikeManager implements BikeManager {
         }
         UtilBikeView.printEBikeList(eBikes);
     }
+
     @Override
-    public boolean addOrderDetails(SalesRecord salesRecord){
+    public boolean addOrderDetails(SalesRecord salesRecord) {
         for (Bike bike : dataManager.getEBikeList())
             if (salesRecord.getBikeId() == bike.getBikeId()) {
                 dataManager.addOrderDetails(salesRecord);
-               setBikeStatus(bike,BikeStatus.RESERVED);
+                setBikeStatus(bike, BikeStatus.RESERVED);
                 return true;
             }
         return false;
     }
-    public void setBikeStatus(Bike bike, BikeStatus bikeStatus){
+
+    public void setBikeStatus(Bike bike, BikeStatus bikeStatus) {
         bike.setAvailabilityStatus(bikeStatus);
     }
 }

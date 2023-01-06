@@ -22,9 +22,9 @@ public class CustomerView {
     Scanner sc = new Scanner(System.in);
     BikeManagerController bikeManager = new BikeManagerController();
     SalesExecutiveController salesExecutive = new SalesExecutiveController();
-    CustomerController customerController = new CustomerController();
 
     public void viewPortal(Customer customer) {
+        CustomerController customerController = new CustomerController(customer);
         System.out.println("--------------------Welcome to customer Portal---------------------------");
         whileLoop:
         while (true) {
@@ -40,7 +40,7 @@ public class CustomerView {
             customerRoles = CustomerRoles.values()[Integer.parseInt(option) - 1];
             switch (customerRoles) {
                 case VIEW_BIKE:
-                    bikeManager.viewAvailableBike();
+                    customerController.viewAvailableBike();
                     break;
                 case COMPARE_BIKE:
                     if (!salesExecutive.compareBike(UtilBikeInput.getBikesIdToCompare()))
@@ -54,7 +54,7 @@ public class CustomerView {
                         System.out.println("Enter valid Bike Id");
                     break;
                 case VIEW_PERSONAL_DETAILS:
-                    customerController.showPersonalDetails(customer);
+                    customerController.showPersonalDetails();
                     break;
                 case LOGOUT:
                     break whileLoop;

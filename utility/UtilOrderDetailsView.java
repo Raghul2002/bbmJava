@@ -4,7 +4,7 @@ import bbm.SalesRecord.SalesRecord;
 
 import java.util.List;
 
-public class UtilOrderDetailsView {
+public final class UtilOrderDetailsView {
     private UtilOrderDetailsView(){}
     public static void viewOrderDetails(List<SalesRecord> orderDetails){
             if (!orderDetails.isEmpty()) {

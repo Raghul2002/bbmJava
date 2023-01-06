@@ -1,6 +1,5 @@
 package bbm.owner;
 
-import bbm.manager.BikeManagerController;
 import bbm.utility.UserView.UtilCustomerView;
 import bbm.utility.UserView.UtilManagerView;
 import bbm.utility.UserView.UtilSalesExecutiveView;
@@ -28,12 +27,10 @@ public class OwnerView {
         LOGOUT,
     }
 
-    OwnerController ownerController = new OwnerController();
-    BikeManagerController bikeManager = new BikeManagerController();
     Scanner sc = new Scanner(System.in);
 
     public void viewPortal(Owner owner) {
-
+        OwnerController ownerController = new OwnerController(owner);
         System.out.println("--------------------Welcome to Owner Portal---------------------------");
         whileLoop:
         while (true) {
@@ -51,22 +48,22 @@ public class OwnerView {
             switch (ownerRoles) {
                 case ADD_MANAGER:
                     System.out.println("Enter Manager Details ");
-                    ownerController.addManager(owner, UtilUserInput.getSignUpDetails());
+                    ownerController.addManager(UtilUserInput.getSignUpDetails());
                     break;
                 case ADD_SALES_EXECUTIVE:
                     System.out.println("Enter Sales Executive Details ");
-                    ownerController.addSalesExecutive(owner, UtilUserInput.getSignUpDetails());
+                    ownerController.addSalesExecutive(UtilUserInput.getSignUpDetails());
                     break;
                 case REMOVE_MANAGER:
                     System.out.println("Enter manager id you want to remove :");
-                    if (ownerController.removeManger(owner, sc.nextInt()))
+                    if (ownerController.removeManger(sc.nextInt()))
                         System.out.println("Successfully Removed");
                     else
                         System.out.println("Failed, Enter valid Manager Id !");
                     break;
                 case REMOVE_SALES_EXECUTIVE:
                     System.out.println("Enter Sales Executive id you want to remove :");
-                    if (ownerController.removeSalesExecutive(owner, sc.nextInt()))
+                    if (ownerController.removeSalesExecutive(sc.nextInt()))
                         System.out.println("Successfully Removed");
                     else
                         System.out.println("Failed, Enter valid Manager Id !");
@@ -84,16 +81,16 @@ public class OwnerView {
                     UtilCustomerView.showCustomerDetails(customerList);
                     break;
                 case VIEW_BIKE_DETAILS:
-                    bikeManager.viewAvailableBike();
+                    ownerController.viewAvailableBike();
                     break;
                 case VIEW_SOLD_DETAILS:
-                    bikeManager.viewSoldDetails(owner);
+                    ownerController.viewSoldDetails();
                     break;
                 case VIEW_PERSONAL_DETAILS:
-                    ownerController.showPersonalDetails(owner);
+                    ownerController.showPersonalDetails();
                     break;
                 case VIEW_SOLD_BIKE_DETAIL:
-                    bikeManager.viewSoldBike(owner);
+                    ownerController.viewSoldBike();
                     break;
                 case LOGOUT:
                     System.out.println("Logged out successfully !!");

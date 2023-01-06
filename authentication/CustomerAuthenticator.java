@@ -1,8 +1,8 @@
 package bbm.authentication;
 
 import bbm.UserAuthentication;
-import bbm.database.Database;
-import bbm.database.IDatabase;
+import bbm.dataManager.DataManager;
+import bbm.dataManager.IDataManager;
 import bbm.model.account.Customer;
 import bbm.model.account.User;
 
@@ -10,11 +10,11 @@ import java.util.List;
 
 public class CustomerAuthenticator implements UserAuthentication {
 
-    public User authenticate(List<String> loginCredentials){
-        IDatabase db = Database.getInstance();
-        List<Customer> customerList = db.getCustomerList();
+    public User authenticate(String userName,String password){
+        IDataManager dataManager = new DataManager();
+        List<Customer> customerList = dataManager.getCustomerList();
         for (Customer i : customerList)
-            if( i.getUserName().equals(loginCredentials.get(0)) && i.getPassword().equals(loginCredentials.get(1)))
+            if( i.getUserName().equals(userName) && i.getPassword().equals(password))
                 return i;
         return null;
     }

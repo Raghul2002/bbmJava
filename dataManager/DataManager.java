@@ -1,9 +1,11 @@
 package bbm.dataManager;
 
+import bbm.database.Database;
 import bbm.database.IDatabase;
 import bbm.SalesRecord.SalesRecord;
 import bbm.model.account.Customer;
 import bbm.model.account.Manager;
+import bbm.model.account.Owner;
 import bbm.model.account.SalesExecutive;
 import bbm.model.bike.EBike;
 import bbm.model.bike.MBike;
@@ -11,7 +13,7 @@ import bbm.model.bike.MBike;
 import java.util.List;
 
 public class DataManager implements IDataManager {
-    IDatabase db = IDatabase.createDatabaseInstance();
+    IDatabase db = Database.getInstance();
 
     @Override
     public void addUser(Manager manager) {
@@ -56,6 +58,9 @@ public class DataManager implements IDataManager {
     @Override
     public void removeBike(MBike mBike, Manager manager) {
         db.removeBike(mBike);
+    }
+    public List<Owner> getOwnerList() {
+        return db.getOwnerList();
     }
 
     @Override

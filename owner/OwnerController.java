@@ -1,39 +1,31 @@
 package bbm.owner;
 
 import bbm.dataManager.DataManager;
+import bbm.manager.BikeManagerController;
 import bbm.model.account.*;
 import bbm.dataManager.IDataManager;
 import bbm.utility.UserView.UtilOwnerView;
-import bbm.enumPackage.EnumUserDetails;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class OwnerController {
+    Owner owner;
+    OwnerController(Owner owner){
+        this.owner = owner;
+    }
     IDataManager dataManager = new DataManager();
-    protected void addManager(Owner owner, HashMap<EnumUserDetails, String> details) {
-        String firstName =  details.get(EnumUserDetails.FIRST_NAME);
-        String lastName =  details.get(EnumUserDetails.LAST_NAME);
-        String userName =  details.get(EnumUserDetails.USER_NAME);
-        String password =  details.get(EnumUserDetails.PASSWORD);
-        String emailId =  details.get(EnumUserDetails.EMAIL_ID);
-        String phoneNo =  details.get(EnumUserDetails.PHONE_NO);
-        Manager manager = new Manager(firstName, lastName, userName, password, emailId, phoneNo);
+    BikeManagerController bikeManagerController = new BikeManagerController();
+    protected void addManager(SignUpDetails details) {
+        Manager manager = new Manager(details.getFirstName(), details.getLastName(), details.getUserName(), details.getPassword(), details.getEmailId(), details.getPhoneNo());
         dataManager.addUser(manager);
     }
-    protected void addSalesExecutive(Owner owner,HashMap<EnumUserDetails, String> details) {
-        String firstName =  details.get(EnumUserDetails.FIRST_NAME);
-        String lastName =  details.get(EnumUserDetails.LAST_NAME);
-        String userName =  details.get(EnumUserDetails.USER_NAME);
-        String password =  details.get(EnumUserDetails.PASSWORD);
-        String emailId =  details.get(EnumUserDetails.EMAIL_ID);
-        String phoneNo =  details.get(EnumUserDetails.PHONE_NO);
-        SalesExecutive salesExecutive = new SalesExecutive(firstName, lastName, userName, password, emailId, phoneNo);
+    protected void addSalesExecutive(SignUpDetails details) {
+        SalesExecutive salesExecutive = new SalesExecutive(details.getFirstName(), details.getLastName(), details.getUserName(), details.getPassword(), details.getEmailId(), details.getPhoneNo());
         dataManager.addUser(salesExecutive);
     }
 
-    protected boolean removeManger(Owner owner,int id) {
+    protected boolean removeManger(int id) {
         List <Manager> managerList = dataManager.getManagerList();
         for (Manager i : managerList) {
             if( i.getManagerId() == id){
@@ -43,7 +35,7 @@ public class OwnerController {
         }
         return false;
     }
-    protected boolean removeSalesExecutive(Owner owner,int id) {
+    protected boolean removeSalesExecutive(int id) {
         List <SalesExecutive> salesExecutiveList = dataManager.getSalesExecutiveList();
         for (SalesExecutive i : salesExecutiveList) {
             if( i.getSalesExecutiveId() == id){
@@ -63,9 +55,19 @@ public class OwnerController {
     protected List<Customer> getCustomerList() {
         return dataManager.getCustomerList();
     }
-    protected void showPersonalDetails(Owner owner){
+    protected void showPersonalDetails(){
         List<Owner> userList = new ArrayList<>();
         userList.add(owner);
         UtilOwnerView.showOwnerDetail(userList);
+    }
+    protected void viewAvailableBike(){
+        bikeManagerController.viewAvailableBike();
+    }
+    protected void viewSoldDetails(){
+        bikeManagerController.viewSoldDetails(owner);
+    }
+
+    protected void viewSoldBike(){
+        bikeManagerController.viewSoldBike(owner);
     }
 }

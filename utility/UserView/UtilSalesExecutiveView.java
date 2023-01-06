@@ -4,7 +4,7 @@ import bbm.model.account.SalesExecutive;
 
 import java.util.List;
 
-public class UtilSalesExecutiveView {
+public final class UtilSalesExecutiveView {
     private UtilSalesExecutiveView(){}
     private static void salesExecutiveHeader() {
         divider();

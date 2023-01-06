@@ -2,18 +2,17 @@ package bbm.utility;
 
 import bbm.encryption.IEncryption;
 import bbm.encryption.Encryption;
-import bbm.enumPackage.EnumUserDetails;
+import bbm.model.account.SignUpDetails;
 
 import java.util.*;
 
-public class UtilUserInput {
+public final class UtilUserInput {
     static Scanner sc = new Scanner(System.in);
-    private static String firstName, lastName, userName, password, emailId, phoneNo;
-
     private UtilUserInput() {
     }
 
-    private static String getUserNameDetails() {
+    public static String getUserName() {
+        String userName;
         do {
             System.out.println("Enter User Name \t:");
             userName = sc.next();
@@ -21,7 +20,8 @@ public class UtilUserInput {
         return userName;
     }
 
-    private static String getPasswordDetails() {
+    public static String getPassword() {
+        String password;
         IEncryption encryption = new Encryption();
         System.out.println("Enter Password \t:");
         password = sc.next();
@@ -29,7 +29,8 @@ public class UtilUserInput {
         return password;
     }
 
-    private static String getFirstNameDetails() {
+    private static String getFirstName() {
+        String firstName;
         do {
             System.out.println("Enter First Name \t:");
             firstName = sc.next();
@@ -38,7 +39,8 @@ public class UtilUserInput {
         return firstName;
     }
 
-    private static String getLastNameDetails() {
+    private static String getLastName() {
+        String lastName;
         do {
             System.out.println("Enter Last Name \t:");
             lastName = sc.next();
@@ -47,7 +49,8 @@ public class UtilUserInput {
         return lastName;
     }
 
-    private static String getEmailIdDetails() {
+    private static String getEmailId() {
+        String emailId;
         do {
             System.out.println("Enter Email \t:");
             emailId = sc.next();
@@ -56,7 +59,8 @@ public class UtilUserInput {
 
     }
 
-    private static String getPhoneNoDetails() {
+    private static String getPhoneNo() {
+        String phoneNo;
         do {
             System.out.println("Enter Phone number \t:");
             phoneNo = sc.next();
@@ -65,29 +69,9 @@ public class UtilUserInput {
         return phoneNo;
     }
 
-    public static List<String> getSignInDetails() {
-        getUserNameDetails();
-        getPasswordDetails();
-        List<String> details = new ArrayList<>();
-        details.add(userName);
-        details.add(password);
-        return details;
-    }
 
-    public static HashMap<EnumUserDetails, String> getSignUpDetails() {
+    public static SignUpDetails getSignUpDetails() {
         System.out.println("Enter sign up details :");
-        HashMap<EnumUserDetails, String> details = new HashMap<>();
-        getFirstNameDetails();
-        getLastNameDetails();
-        getSignInDetails();
-        getEmailIdDetails();
-        getPhoneNoDetails();
-        details.put(EnumUserDetails.FIRST_NAME, firstName);
-        details.put(EnumUserDetails.LAST_NAME, lastName);
-        details.put(EnumUserDetails.USER_NAME, userName);
-        details.put(EnumUserDetails.PASSWORD, password);
-        details.put(EnumUserDetails.EMAIL_ID, emailId);
-        details.put(EnumUserDetails.PHONE_NO, phoneNo);
-        return details;
+        return new SignUpDetails(getFirstName(), getLastName(), getUserName(), getPassword(), getEmailId(), getPhoneNo());
     }
 }

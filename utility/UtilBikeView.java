@@ -6,7 +6,7 @@ import bbm.model.bike.MBike;
 import java.util.List;
 
 
-public class UtilBikeView {
+public final class UtilBikeView {
     private UtilBikeView(){}
     private static void mBikeHeader() {
         mBikeDivider();

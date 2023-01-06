@@ -15,7 +15,6 @@ import bbm.salesExecutive.SalesExecutiveView;
 import bbm.utility.UtilUserInput;
 import bbm.utility.Validation;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class BikeBookingManagement {
@@ -39,6 +38,10 @@ public class BikeBookingManagement {
         CUSTOMER,
         EXIT,
     }
+    enum AccountAction{
+        SIGN_UP,
+        SING_IN
+    }
 
     private void mainLoop() {
         User user;
@@ -58,49 +61,51 @@ public class BikeBookingManagement {
             userCategory = UserCategory.values()[Integer.parseInt(val) - 1];
             switch (userCategory) {
                 case OWNER:
-                    List<String> loginCredentials = UtilUserInput.getSignInDetails();
                     authentication = new OwnerAuthenticator();
-                    user = authentication.authenticate(loginCredentials);
+                    user = authentication.authenticate(UtilUserInput.getUserName(),UtilUserInput.getPassword());
                     if (user != null) {
                         OwnerView ownerView = new OwnerView();
                         ownerView.viewPortal((Owner) user);
                     }
                     break;
                 case MANAGER:
-                    loginCredentials = UtilUserInput.getSignInDetails();
                     authentication = new ManagerAuthenticator();
-                    user = authentication.authenticate(loginCredentials);
+                    user = authentication.authenticate(UtilUserInput.getUserName(),UtilUserInput.getPassword());
                     if (user instanceof Manager) {
                         ManagerView managerView = new ManagerView();
                         managerView.viewPortal((Manager) user);
                     }
                     break;
                 case SALES_EXECUTIVE:
-                    loginCredentials = UtilUserInput.getSignInDetails();
                     authentication = new SalesExecutiveAuthenticator();
-                    user = authentication.authenticate(loginCredentials);
+                    user = authentication.authenticate(UtilUserInput.getUserName(),UtilUserInput.getPassword());
                     if (user instanceof SalesExecutive) {
                         SalesExecutiveView salesExecutiveView = new SalesExecutiveView();
                         salesExecutiveView.viewPortal((SalesExecutive) user);
                     }
                     break;
                 case CUSTOMER:
-                    System.out.println("1.Sign Up\n2.Sign In");
-                    switch (sc.nextLine()) {
-                        case "1":
+                    for(int i=0;i<AccountAction.values().length;i++){
+                        System.out.println(i+1+"."+AccountAction.values()[i]);
+                    }
+                    String type;
+                    do {
+                        System.out.println("Enter number :");
+                        type = sc.nextLine();
+                    } while (!Validation.validateNumber(val, AccountAction.values().length));
+                    AccountAction action = AccountAction.values()[Integer.parseInt(type) - 1];
+                    switch (action) {
+                        case SIGN_UP:
                             salesExecutive.addCustomer(UtilUserInput.getSignUpDetails());
                             System.out.println("Customer added successfully");
-                        case "2":
-                            loginCredentials = UtilUserInput.getSignInDetails();
+                        case SING_IN:
                             authentication = new CustomerAuthenticator();
-                            user = authentication.authenticate(loginCredentials);
+                            user = authentication.authenticate(UtilUserInput.getUserName(),UtilUserInput.getPassword());
                             if (user instanceof Customer) {
                                 CustomerView customerView = new CustomerView();
                                 customerView.viewPortal((Customer) user);
                             }
                             break;
-                        default:
-                            System.out.println("Enter valid number!!");
                     }
                     break;
                 case EXIT:

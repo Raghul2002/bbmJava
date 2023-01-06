@@ -2,7 +2,7 @@ package bbm.utility;
 
 import java.util.regex.*;
 
-public class Validation {
+public final class Validation {
     private Validation (){}
     private static boolean validate(String regex,String string){
         Pattern p = Pattern.compile(regex);

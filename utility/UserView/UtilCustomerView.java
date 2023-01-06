@@ -4,7 +4,7 @@ import bbm.model.account.Customer;
 
 import java.util.List;
 
-public class UtilCustomerView {
+public final class UtilCustomerView {
     private UtilCustomerView(){}
     private static void customerHeader() {
         divider();

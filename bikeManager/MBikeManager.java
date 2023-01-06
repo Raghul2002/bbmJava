@@ -11,34 +11,30 @@ import bbm.utility.UtilBikeView;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class MBikeManager implements BikeManager {
+public class MBikeManager implements BikeManager<MBike> {
     DataManager dataManager = new DataManager();
+
     @Override
-    public boolean addBike(Bike bike, Manager manager) {
-        if(bike instanceof MBike) {
-            dataManager.addBike((MBike) bike, manager);
-            return true;
-        }
-        return false;
+    public void addBike(MBike bike, Manager manager) {
+        dataManager.addBike(bike, manager);
     }
 
     @Override
     public boolean removeBike(int bikeId, Manager manager) {
         for (MBike i : dataManager.getMBikeList()) {
-            if( i.getBikeId() == bikeId){
-                dataManager.removeBike(i,manager);
+            if (i.getBikeId() == bikeId) {
+                dataManager.removeBike(i, manager);
                 return true;
             }
         }
         return false;
     }
 
-    public void viewBike(BikeStatus bikeStatus){
+    public void viewBike(BikeStatus bikeStatus) {
         List<MBike> mBikeList = dataManager.getMBikeList();
         List<MBike> mBikes = new ArrayList<>();
-        for(MBike bike:mBikeList){
-            if(bike.getAvailabilityStatus().equals( bikeStatus))
+        for (MBike bike : mBikeList) {
+            if (bike.getAvailabilityStatus().equals(bikeStatus))
                 mBikes.add(bike);
         }
         UtilBikeView.printMBikeList(mBikes);
@@ -55,16 +51,18 @@ public class MBikeManager implements BikeManager {
         }
         UtilBikeView.printMBikeList(mBikes);
     }
-    public boolean addOrderDetails(SalesRecord salesRecord){
+
+    public boolean addOrderDetails(SalesRecord salesRecord) {
         for (Bike bike : dataManager.getMBikeList())
             if (salesRecord.getBikeId() == bike.getBikeId()) {
                 dataManager.addOrderDetails(salesRecord);
-                setBikeStatus(bike,BikeStatus.RESERVED);
+                setBikeStatus(bike, BikeStatus.RESERVED);
                 return true;
             }
         return false;
     }
-    public void setBikeStatus(Bike bike, BikeStatus bikeStatus){
+
+    public void setBikeStatus(Bike bike, BikeStatus bikeStatus) {
         bike.setAvailabilityStatus(bikeStatus);
     }
 

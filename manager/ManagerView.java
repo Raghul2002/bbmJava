@@ -41,16 +41,13 @@ public class ManagerView {
             switch (managerRoles) {
                 case ADD_BIKE:
                     System.out.println("1.Add Mechanical Bike\n2.Add Electronic Bike");
+                    UtilBikeInput utilBikeInput = new UtilBikeInput();
                     switch (sc.nextLine()) {
                         case "1":
-                            if (mBikeManager.addBike(UtilBikeInput.getMBikeDetails(), manager))
-                                System.out.println("Mechanical bike added Successfully");
-                            else System.out.println("Sorry!! Couldn't add Mechanical Bike");
+                            mBikeManager.addBike(utilBikeInput.getMBikeDetails(), manager);
                             break;
                         case "2":
-                            if (eBikeManager.addBike(UtilBikeInput.getEBikeDetails(), manager))
-                                System.out.println("Electrical bike added Electrical Successfully");
-                            else System.out.println("Sorry!! Couldn't add Bike");
+                            eBikeManager.addBike(utilBikeInput.getEBikeDetails(), manager);
                             break;
                         default:
                             System.out.println("Enter Valid Input");

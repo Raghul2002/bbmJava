@@ -5,7 +5,7 @@ import bbm.model.account.User;
 
 import java.util.List;
 
-public class UtilOwnerView {
+public final class UtilOwnerView {
     private UtilOwnerView(){}
     private static void ownerHeader() {
         divider();

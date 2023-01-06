@@ -11,9 +11,6 @@ import bbm.model.bike.MBike;
 import java.util.List;
 
 public interface IDatabase {
-    static Database createDatabaseInstance(){
-        return Database.getInstance();
-    }
     void addUser(Owner owner);
     void addUser(Customer customer);
     void addUser(SalesExecutive salesExecutive);

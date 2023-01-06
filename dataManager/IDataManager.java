@@ -3,6 +3,7 @@ package bbm.dataManager;
 import bbm.SalesRecord.SalesRecord;
 import bbm.model.account.Customer;
 import bbm.model.account.Manager;
+import bbm.model.account.Owner;
 import bbm.model.account.SalesExecutive;
 import bbm.model.bike.EBike;
 import bbm.model.bike.MBike;
@@ -10,10 +11,6 @@ import bbm.model.bike.MBike;
 import java.util.List;
 
 public interface IDataManager {
-
-    static DataManager createDataManagerInstance() {
-        return new DataManager();
-    }
     void addUser(Customer customer);
 
     void addUser(Manager manager);
@@ -25,6 +22,7 @@ public interface IDataManager {
     void addBike(MBike mBike, Manager manager);
     void removeBike(EBike eBike,Manager manager);
     void removeBike(MBike mBike,Manager manager);
+    List<Owner> getOwnerList();
     List<Customer> getCustomerList();
     List<SalesExecutive> getSalesExecutiveList();
     List<Manager> getManagerList();
@@ -32,4 +30,5 @@ public interface IDataManager {
     List<MBike> getMBikeList();
     void addOrderDetails(SalesRecord salesRecord);
     List<SalesRecord> getOrderDetailsList();
+
 }

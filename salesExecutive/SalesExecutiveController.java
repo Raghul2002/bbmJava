@@ -1,17 +1,16 @@
 package bbm.salesExecutive;
 
 import bbm.enumPackage.EnumBikeTypes;
-import bbm.enumPackage.EnumUserDetails;
 import bbm.bikeManager.EBikeManager;
 import bbm.bikeManager.MBikeManager;
 import bbm.dataManager.DataManager;
 import bbm.SalesRecord.SalesRecord;
 import bbm.model.account.Customer;
 import bbm.model.account.SalesExecutive;
+import bbm.model.account.SignUpDetails;
 import bbm.utility.UserView.UtilSalesExecutiveView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class SalesExecutiveController {
@@ -49,14 +48,8 @@ public class SalesExecutiveController {
         return eBikeManager.addOrderDetails(salesRecord);
     }
 
-    public void addCustomer(HashMap<EnumUserDetails, String> details) {
-        String firstName = details.get(EnumUserDetails.FIRST_NAME);
-        String lastName =  details.get(EnumUserDetails.LAST_NAME);
-        String userName =  details.get(EnumUserDetails.USER_NAME);
-        String password =  details.get(EnumUserDetails.PASSWORD);
-        String emailId =  details.get(EnumUserDetails.EMAIL_ID);
-        String phoneNo =  details.get(EnumUserDetails.PHONE_NO);
-        Customer customer = new Customer(firstName, lastName, userName, password, emailId, phoneNo);
+    public void addCustomer(SignUpDetails details) {
+        Customer customer = new Customer(details.getFirstName(), details.getLastName(), details.getUserName(), details.getPassword(), details.getEmailId(), details.getPhoneNo());
         dataManager.addUser(customer);
     }
 }
