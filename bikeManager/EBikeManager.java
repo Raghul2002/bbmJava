@@ -7,7 +7,6 @@ import bbm.model.bike.Bike;
 import bbm.model.bike.BikeStatus;
 import bbm.model.bike.EBike;
 import bbm.dataManager.IDataManager;
-import bbm.model.bike.MBike;
 import bbm.utility.UtilBikeView;
 
 import java.util.ArrayList;

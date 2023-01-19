@@ -10,7 +10,7 @@ import bbm.model.bike.MBike;
 
 import java.util.List;
 
-public interface IDataManager {
+public interface DataManager {
     void addUser(Customer customer);
 
     void addUser(Manager manager);
