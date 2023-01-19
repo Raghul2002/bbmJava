@@ -1,6 +1,6 @@
 package bbm.model.bike;
 
-public class EBike extends Bike {
+public final class EBike extends Bike {
     private final int rangeEco, rangeNormal, rangeSport, motorPower, chargeTime;
 
     public EBike(int topSpeed, int groundClearance, int wheelBase, int maxTorque, int price, String bikeModel, String bodyType, String instrumentConsole, String seatType, int rangeEco, int rangeNormal, int rangeSport, int motorPower, int chargeTime) {

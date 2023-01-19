@@ -3,14 +3,15 @@ package bbm.model.account;
 
 public class Customer extends User {
     private static int cId = 1;
-    private final int customerId = cId;
+    private final String customerId;
 
     public Customer(String firstName, String lastName, String userName, String password, String emailId, String phoneNo) {
         super(firstName, lastName, userName, password, emailId, phoneNo);
+        customerId = "CID"+cId;
         cId++;
     }
 
-    public int getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 }

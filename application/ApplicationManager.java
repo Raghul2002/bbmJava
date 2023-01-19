@@ -1,7 +1,6 @@
 package bbm.application;
 
 import bbm.Factory.BBMFactory;
-import bbm.database.BBMAccess;
 import bbm.model.account.Owner;
 import bbm.model.bike.BikeTypes;
 import bbm.bikeManager.BikeManager;
@@ -16,11 +15,10 @@ import bbm.model.bike.Bike;
 import bbm.model.bike.BikeStatus;
 import bbm.model.bike.EBike;
 import bbm.model.bike.MBike;
-import bbm.utility.UtilOrderDetailsView;
 
 import java.util.List;
 
-public final class ApplicationModel implements OwnerAccess, ManagerAccess, CustomerAccess, SalesExecutiveAccess, BBMAccess {
+public final class ApplicationManager implements OwnerAccess, ManagerAccess, CustomerAccess, SalesExecutiveAccess, BBMAccess {
     IDataManager dataManager = BBMFactory.getIDataManagerInstance();
     BikeManager<EBike> eBikeManager = new EBikeManager(dataManager);
     BikeManager<MBike> mBikeManager = new MBikeManager(dataManager);

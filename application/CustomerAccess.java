@@ -1,10 +1,18 @@
 package bbm.application;
 
-import bbm.BikeTypes;
+import bbm.model.bike.BikeTypes;
 import bbm.SalesRecord.SalesRecord;
+import bbm.model.bike.EBike;
+import bbm.model.bike.MBike;
 
-public interface customerAccess {
-    void viewAvailableBike();
-    boolean addOrderDetails(SalesRecord salesRecord, BikeTypes bikeType);
+import java.util.List;
+
+public interface CustomerAccess {
+    List<MBike> getAvailableMBike();
+
+    List<EBike> getAvailableEBike();
+
+    boolean addBookingOrder(SalesRecord salesRecord, BikeTypes bikeType);
+
     boolean compareBike(BikeTypes bikeType, int bikeId1, int bikeId2);
 }

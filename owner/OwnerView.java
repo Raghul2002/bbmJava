@@ -1,17 +1,20 @@
 package bbm.owner;
 
+import bbm.Factory.BBMFactory;
 import bbm.utility.UserView.UtilCustomerView;
 import bbm.utility.UserView.UtilManagerView;
 import bbm.utility.UserView.UtilSalesExecutiveView;
 import bbm.utility.UtilUserInput;
 
 import bbm.model.account.*;
-import bbm.utility.Validation;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class OwnerView {
+public final class OwnerView {
+    private final OwnerController ownerController;
+    private final Scanner sc = new Scanner(System.in);
+
     enum OwnerRoles {
         ADD_MANAGER,
         ADD_SALES_EXECUTIVE,
@@ -27,43 +30,47 @@ public class OwnerView {
         LOGOUT,
     }
 
-    Scanner sc = new Scanner(System.in);
+    public OwnerView(OwnerController ownerController) {
+        this.ownerController = ownerController;
+    }
 
-    public void viewPortal(Owner owner) {
-        OwnerController ownerController = new OwnerController(owner);
+    public void viewPortal() {
+        String firstName = null, lastName = null, userName = null, password = null, emailId = null, phoneNo = null;
         System.out.println("--------------------Welcome to Owner Portal---------------------------");
         whileLoop:
         while (true) {
-            String option;
             OwnerRoles ownerRoles;
             for (int i = 0; i < OwnerRoles.values().length; i++) {
                 System.out.println(i + 1 + "." + OwnerRoles.values()[i]);
             }
-            do {
-                System.out.println("Enter number :");
-                option = sc.nextLine();
-                System.out.println(option);
-            } while (!Validation.validateNumber(option, OwnerRoles.values().length));
+            String option = UtilUserInput.getNumberForSwitch(OwnerRoles.values().length);
             ownerRoles = OwnerRoles.values()[Integer.parseInt(option) - 1];
+            if (ownerRoles == OwnerRoles.ADD_MANAGER || ownerRoles == OwnerRoles.ADD_SALES_EXECUTIVE) {
+                System.out.println("\tEnter User Details");
+                firstName = UtilUserInput.getFirstName();
+                lastName = UtilUserInput.getLastName();
+                userName = UtilUserInput.getUserName();
+                password = UtilUserInput.getPassword();
+                emailId = UtilUserInput.getEmailId();
+                phoneNo = UtilUserInput.getPhoneNo();
+            }
             switch (ownerRoles) {
                 case ADD_MANAGER:
-                    System.out.println("Enter Manager Details ");
-                    ownerController.addManager(UtilUserInput.getSignUpDetails());
+                    ownerController.addManager(firstName, lastName, userName, password, emailId, phoneNo);
                     break;
                 case ADD_SALES_EXECUTIVE:
-                    System.out.println("Enter Sales Executive Details ");
-                    ownerController.addSalesExecutive(UtilUserInput.getSignUpDetails());
+                    ownerController.addSalesExecutive(firstName, lastName, userName, password, emailId, phoneNo);
                     break;
                 case REMOVE_MANAGER:
                     System.out.println("Enter manager id you want to remove :");
-                    if (ownerController.removeManger(sc.nextInt()))
+                    if (ownerController.removeManger(sc.nextLine()))
                         System.out.println("Successfully Removed");
                     else
                         System.out.println("Failed, Enter valid Manager Id !");
                     break;
                 case REMOVE_SALES_EXECUTIVE:
                     System.out.println("Enter Sales Executive id you want to remove :");
-                    if (ownerController.removeSalesExecutive(sc.nextInt()))
+                    if (ownerController.removeSalesExecutive(sc.nextLine()))
                         System.out.println("Successfully Removed");
                     else
                         System.out.println("Failed, Enter valid Manager Id !");

@@ -1,4 +1,4 @@
-package bbm.database;
+package bbm.application;
 
 import bbm.model.account.Customer;
 import bbm.model.account.Manager;

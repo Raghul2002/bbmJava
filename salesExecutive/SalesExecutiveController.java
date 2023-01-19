@@ -1,55 +1,39 @@
 package bbm.salesExecutive;
 
-import bbm.enumPackage.EnumBikeTypes;
-import bbm.bikeManager.EBikeManager;
-import bbm.bikeManager.MBikeManager;
-import bbm.dataManager.DataManager;
-import bbm.SalesRecord.SalesRecord;
-import bbm.model.account.Customer;
+import bbm.Factory.BBMFactory;
+import bbm.application.SalesExecutiveAccess;
 import bbm.model.account.SalesExecutive;
-import bbm.model.account.SignUpDetails;
 import bbm.utility.UserView.UtilSalesExecutiveView;
+import bbm.utility.UtilBikeView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SalesExecutiveController {
-    DataManager dataManager = new DataManager();
-    EBikeManager eBikeManager = new EBikeManager();
-    MBikeManager mBikeManager = new MBikeManager();
+public final class SalesExecutiveController {
+    SalesExecutive salesExecutive;
+    SalesExecutiveAccess salesExecutiveAccess;
 
-    public boolean compareBike(List<Integer> bikeDetails) {
-        if (bikeDetails.get(1).equals(bikeDetails.get(2)))
-            return false;
-        switch (bikeDetails.get(0)) {
-            case 1:
-                mBikeManager.compareBike(bikeDetails.get(1), bikeDetails.get(2));
-                break;
-            case 2:
-                eBikeManager.compareBike(bikeDetails.get(1), bikeDetails.get(2));
-                break;
-            default:
-                return false;
-        }
-        return true;
+    public SalesExecutiveController(SalesExecutive salesExecutive,SalesExecutiveAccess salesExecutiveAccess) {
+        this.salesExecutive = salesExecutive;
+        this.salesExecutiveAccess = salesExecutiveAccess;
     }
 
-    protected void showPersonalDetails(SalesExecutive salesExecutive) {
+    public void showPersonalDetails() {
         List<SalesExecutive> userList = new ArrayList<>();
         userList.add(salesExecutive);
         UtilSalesExecutiveView.showSalesExecutiveDetails(userList);
     }
-
-    public boolean buyBike(int customerId, int bikeId, EnumBikeTypes bikeType) {
-        SalesRecord salesRecord = new SalesRecord(bikeId, customerId);
-        if (bikeType.equals(EnumBikeTypes.MECHANICAL_BIKE)) {
-            return mBikeManager.addOrderDetails(salesRecord);
-        }
-        return eBikeManager.addOrderDetails(salesRecord);
+    public void viewAvailableBike() {
+        UtilBikeView.printEBikeList(salesExecutiveAccess.getAvailableEBike());
+        UtilBikeView.printMBikeList(salesExecutiveAccess.getAvailableMBike());
+    }
+    public void viewReservedBike() {
+        UtilBikeView.printEBikeList(salesExecutiveAccess.getReservedEBike());
+        UtilBikeView.printMBikeList(salesExecutiveAccess.getReservedMBike());
     }
 
-    public void addCustomer(SignUpDetails details) {
-        Customer customer = new Customer(details.getFirstName(), details.getLastName(), details.getUserName(), details.getPassword(), details.getEmailId(), details.getPhoneNo());
-        dataManager.addUser(customer);
+    public void confirmBikeBooking() {
+        salesExecutiveAccess.confirmBookingOrders(salesExecutive);
     }
+
 }

@@ -1,26 +1,24 @@
 package bbm.utility;
 
-import bbm.enumPackage.EnumBikeTypes;
-import bbm.manager.BikeManagerController;
+import bbm.model.bike.BikeTypes;
 import bbm.model.bike.EBike;
 import bbm.model.bike.MBike;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public final class UtilBikeInput {
 
-     Scanner sc = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
     private int topSpeed, groundClearance, wheelBase, maxTorque, price;
-    private  String bikeModel, bodyType, instrumentConsole, seatType;
-    public  static int getBikeId(){
+    private String bikeModel, bodyType, instrumentConsole, seatType;
+
+    public static int getBikeId() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter bike Id:");
         return sc.nextInt();
     }
 
-    private  void getBikeDetails() {
+    private void getBikeDetails() {
         System.out.println("Enter Bike Model \t:");
         bikeModel = sc.next();
         System.out.println("Enter Top Speed \t:");
@@ -41,7 +39,7 @@ public final class UtilBikeInput {
         seatType = sc.next();
     }
 
-    public  MBike getMBikeDetails() {
+    public MBike getMBikeDetails() {
         getBikeDetails();
         System.out.println("Enter Mileage \t:");
         int mileage = sc.nextInt();
@@ -60,7 +58,7 @@ public final class UtilBikeInput {
         return new MBike(topSpeed, groundClearance, wheelBase, maxTorque, price, bikeModel, bodyType, instrumentConsole, seatType, mileage, noOfCylinders, engineType, displacement, coolingSystem, fuelSupply, gearBox);
     }
 
-    public  EBike getEBikeDetails() {
+    public EBike getEBikeDetails() {
         getBikeDetails();
         System.out.println("Enter Range Eco \t:");
         int rangeEco = sc.nextInt();
@@ -74,26 +72,13 @@ public final class UtilBikeInput {
         int chargeTime = sc.nextInt();
         return new EBike(topSpeed, groundClearance, wheelBase, maxTorque, price, bikeModel, bodyType, instrumentConsole, seatType, rangeEco, rangeNormal, rangeSport, motorPower, chargeTime);
     }
-    public static List<Integer> getBikesIdToCompare(){
-        BikeManagerController bikeManager = new BikeManagerController();
+
+    public static BikeTypes getBikeType() {
         Scanner sc = new Scanner(System.in);
-        List<Integer> bikeDetails = new ArrayList<>();
-        bikeManager.viewAvailableBike();
-        System.out.println("You want to compare\n1.Mechanical Bikes\n2.Electric Bikes");
-        bikeDetails.add(sc.nextInt());
-        System.out.println("---------------Compare Bikes---------------");
-        System.out.println("Enter Bike 1 ID:");
-        bikeDetails.add(sc.nextInt());
-        System.out.println("Enter Bike 2 ID:");
-        bikeDetails.add(sc.nextInt());
-        return bikeDetails;
-    }
-    public  static EnumBikeTypes getBikeType() {
-        Scanner sc = new Scanner(System.in);
-        for(EnumBikeTypes bikeTypes :EnumBikeTypes.values())
-            System.out.println(bikeTypes.ordinal()+1+" "+bikeTypes);
+        for (BikeTypes bikeTypes : BikeTypes.values())
+            System.out.println(bikeTypes.ordinal() + 1 + " " + bikeTypes);
         int a = sc.nextInt();
-        return EnumBikeTypes.values()[a-1];
+        return BikeTypes.values()[a - 1];
     }
 }
 

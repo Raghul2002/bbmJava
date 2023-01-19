@@ -1,73 +1,70 @@
 package bbm.owner;
 
-import bbm.dataManager.DataManager;
-import bbm.manager.BikeManagerController;
+import bbm.Factory.BBMFactory;
+import bbm.application.OwnerAccess;
 import bbm.model.account.*;
-import bbm.dataManager.IDataManager;
 import bbm.utility.UserView.UtilOwnerView;
+import bbm.utility.UtilBikeView;
+import bbm.utility.UtilOrderDetailsView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OwnerController {
-    Owner owner;
-    OwnerController(Owner owner){
+public final class OwnerController {
+    private final Owner owner;
+    private final OwnerAccess ownerAccess;
+
+    public OwnerController(Owner owner,OwnerAccess ownerAccess) {
         this.owner = owner;
+        this.ownerAccess = ownerAccess;
     }
-    IDataManager dataManager = new DataManager();
-    BikeManagerController bikeManagerController = new BikeManagerController();
-    protected void addManager(SignUpDetails details) {
-        Manager manager = new Manager(details.getFirstName(), details.getLastName(), details.getUserName(), details.getPassword(), details.getEmailId(), details.getPhoneNo());
-        dataManager.addUser(manager);
-    }
-    protected void addSalesExecutive(SignUpDetails details) {
-        SalesExecutive salesExecutive = new SalesExecutive(details.getFirstName(), details.getLastName(), details.getUserName(), details.getPassword(), details.getEmailId(), details.getPhoneNo());
-        dataManager.addUser(salesExecutive);
+    void addManager(String firstName, String lastName, String userName, String password, String emailId, String phoneNo) {
+        Manager manager = new Manager(firstName, lastName, userName, password, emailId, phoneNo);
+        ownerAccess.addUser(manager);
     }
 
-    protected boolean removeManger(int id) {
-        List <Manager> managerList = dataManager.getManagerList();
-        for (Manager i : managerList) {
-            if( i.getManagerId() == id){
-                dataManager.removeUser(i);
-                return true;
-            }
-        }
-        return false;
-    }
-    protected boolean removeSalesExecutive(int id) {
-        List <SalesExecutive> salesExecutiveList = dataManager.getSalesExecutiveList();
-        for (SalesExecutive i : salesExecutiveList) {
-            if( i.getSalesExecutiveId() == id){
-                dataManager.removeUser(i);
-                return true;
-            }
-        }
-        return false;
+    void addSalesExecutive(String firstName, String lastName, String userName, String password, String emailId, String phoneNo) {
+        SalesExecutive salesExecutive = new SalesExecutive(firstName, lastName, userName, password, emailId, phoneNo);
+        ownerAccess.addUser(salesExecutive);
     }
 
-    protected List<Manager> getManagerList() {
-        return dataManager.getManagerList();
+    boolean removeManger(String id) {
+        return ownerAccess.removeManager(id);
     }
-    protected List<SalesExecutive> getSalesExecutiveList() {
-        return dataManager.getSalesExecutiveList();
+
+    boolean removeSalesExecutive(String id) {
+        return ownerAccess.removeSalesExecutive(id);
     }
-    protected List<Customer> getCustomerList() {
-        return dataManager.getCustomerList();
+
+    List<Manager> getManagerList() {
+        return ownerAccess.getManagerList();
     }
-    protected void showPersonalDetails(){
+
+    List<SalesExecutive> getSalesExecutiveList() {
+        return ownerAccess.getSalesExecutiveList();
+    }
+
+    List<Customer> getCustomerList() {
+        return ownerAccess.getCustomerList();
+    }
+
+    public void showPersonalDetails() {
         List<Owner> userList = new ArrayList<>();
         userList.add(owner);
         UtilOwnerView.showOwnerDetail(userList);
     }
-    protected void viewAvailableBike(){
-        bikeManagerController.viewAvailableBike();
-    }
-    protected void viewSoldDetails(){
-        bikeManagerController.viewSoldDetails(owner);
+
+    public void viewAvailableBike() {
+        UtilBikeView.printEBikeList(ownerAccess.getAvailableEBike());
+        UtilBikeView.printMBikeList(ownerAccess.getAvailableMBike());
     }
 
-    protected void viewSoldBike(){
-        bikeManagerController.viewSoldBike(owner);
+    void viewSoldDetails() {
+        UtilOrderDetailsView.viewOrderDetails(ownerAccess.getSoldDetails());
+    }
+
+    void viewSoldBike() {
+        UtilBikeView.printEBikeList(ownerAccess.getSoldEBike());
+        UtilBikeView.printMBikeList(ownerAccess.getSoldMBike());
     }
 }

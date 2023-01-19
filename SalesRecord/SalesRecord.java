@@ -1,9 +1,10 @@
 package bbm.SalesRecord;
 
-public class SalesRecord {
-    private final int bikeId, customerId;
-    private int salesExecutiveId;
-    public SalesRecord(int bikeId, int customerId) {
+public final class SalesRecord {
+    private final int bikeId;
+    private String salesExecutiveId, customerId;
+
+    public SalesRecord(int bikeId, String customerId) {
         this.bikeId = bikeId;
         this.customerId = customerId;
     }
@@ -12,14 +13,15 @@ public class SalesRecord {
         return bikeId;
     }
 
-    public int getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public int getSalesExecutiveId() {
+    public String getSalesExecutiveId() {
         return salesExecutiveId;
     }
-    public void setSalesExecutiveId(int salesExecutiveId){
+
+    public void setSalesExecutiveId(String salesExecutiveId) {
         this.salesExecutiveId = salesExecutiveId;
     }
 }

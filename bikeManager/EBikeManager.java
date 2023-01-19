@@ -1,6 +1,5 @@
 package bbm.bikeManager;
 
-import bbm.dataManager.DataManager;
 import bbm.SalesRecord.SalesRecord;
 import bbm.model.account.Manager;
 import bbm.model.bike.Bike;
@@ -12,14 +11,15 @@ import bbm.utility.UtilBikeView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EBikeManager implements BikeManager<EBike> {
-    IDataManager dataManager = new DataManager();
-
+public final class EBikeManager implements BikeManager<EBike> {
+    IDataManager dataManager;
+    public EBikeManager(IDataManager dataManager){
+        this.dataManager = dataManager;
+    }
     @Override
     public void addBike(EBike bike, Manager manager) {
         dataManager.addBike(bike, manager);
     }
-
 
     @Override
     public boolean removeBike(int bikeId, Manager manager) {
@@ -32,14 +32,14 @@ public class EBikeManager implements BikeManager<EBike> {
         return false;
     }
 
-    public void viewBike(BikeStatus bikeStatus) {
+    public List<EBike> getBike(BikeStatus bikeStatus) {
         List<EBike> eBikeList = dataManager.getEBikeList();
         List<EBike> eBikes = new ArrayList<>();
         for (EBike bike : eBikeList) {
-            if (bike.getAvailabilityStatus().equals(bikeStatus))
+            if (bike.getBikeStatus().equals(bikeStatus))
                 eBikes.add(bike);
         }
-        UtilBikeView.printEBikeList(eBikes);
+        return eBikes;
     }
 
     @Override
@@ -47,24 +47,21 @@ public class EBikeManager implements BikeManager<EBike> {
         List<EBike> EBikeList = dataManager.getEBikeList();
         List<EBike> eBikes = new ArrayList<>();
         for (EBike i : EBikeList) {
-            if (i.getAvailabilityStatus().equals(BikeStatus.AVAILABLE) && (i.getBikeId() == bikeId1 || i.getBikeId() == bikeId2))
+            if (i.getBikeStatus().equals(BikeStatus.AVAILABLE) && (i.getBikeId() == bikeId1 || i.getBikeId() == bikeId2))
                 eBikes.add(i);
         }
         UtilBikeView.printEBikeList(eBikes);
     }
 
     @Override
-    public boolean addOrderDetails(SalesRecord salesRecord) {
+    public boolean addBookingOrder(SalesRecord salesRecord) {
         for (Bike bike : dataManager.getEBikeList())
             if (salesRecord.getBikeId() == bike.getBikeId()) {
                 dataManager.addOrderDetails(salesRecord);
-                setBikeStatus(bike, BikeStatus.RESERVED);
+                bike.setBikeStatus(BikeStatus.RESERVED);
                 return true;
             }
         return false;
     }
 
-    public void setBikeStatus(Bike bike, BikeStatus bikeStatus) {
-        bike.setAvailabilityStatus(bikeStatus);
-    }
 }

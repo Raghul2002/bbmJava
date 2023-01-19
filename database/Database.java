@@ -11,11 +11,10 @@ import bbm.model.bike.MBike;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Database implements IDatabase {
+public final class Database implements IDatabase {
     private static Database database;
 
-    private Database() {
-    }
+    private Database() {}
 
     public static Database getInstance() {
         if (database == null) database = new Database();

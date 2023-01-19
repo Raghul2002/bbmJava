@@ -1,4 +1,4 @@
-package bbm;
+package bbm.model.bike;
 
 public enum BikeTypes {
     MECHANICAL_BIKE,

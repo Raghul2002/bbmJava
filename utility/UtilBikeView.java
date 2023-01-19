@@ -29,11 +29,11 @@ public final class UtilBikeView {
     }
 
     private static void printMBike(MBike mBike) {
-        System.out.printf("|%7d |%15s |%15d |%20s |%15d |%15d |%15d |%15s |%20s |%15s |%15d |%15d |%16s |%15s |%15s |%15s |%15s |%15s |\n", mBike.getBikeId(), mBike.getBikeModel(), mBike.getTopSpeed(), mBike.getGroundClearance(), mBike.getWheelBase(), mBike.getMaxTorque(), mBike.getPrice(), mBike.getBodyType(), mBike.getInstrumentConsole(), mBike.getSeatType(), mBike.getMileage(), mBike.getNoOfCylinders(), mBike.getEngineType(), mBike.getDisplacement(), mBike.getCoolingSystem(), mBike.getFuelSupply(), mBike.getGearBox(), mBike.getAvailabilityStatus());
+        System.out.printf("|%7d |%15s |%15d |%20s |%15d |%15d |%15d |%15s |%20s |%15s |%15d |%15d |%16s |%15s |%15s |%15s |%15s |%15s |\n", mBike.getBikeId(), mBike.getBikeModel(), mBike.getTopSpeed(), mBike.getGroundClearance(), mBike.getWheelBase(), mBike.getMaxTorque(), mBike.getPrice(), mBike.getBodyType(), mBike.getInstrumentConsole(), mBike.getSeatType(), mBike.getMileage(), mBike.getNoOfCylinders(), mBike.getEngineType(), mBike.getDisplacement(), mBike.getCoolingSystem(), mBike.getFuelSupply(), mBike.getGearBox(), mBike.getBikeStatus());
     }
 
     private static void printEBike(EBike eBike) {
-        System.out.printf("|%7d |%15s |%15d |%20s |%15d |%15d |%15d |%15s |%20s |%15s |%15d |%15d |%15d |%15d |%15s |%15s |\n", eBike.getBikeId(), eBike.getBikeModel(), eBike.getTopSpeed(), eBike.getGroundClearance(), eBike.getWheelBase(), eBike.getMaxTorque(), eBike.getPrice(), eBike.getBodyType(), eBike.getInstrumentConsole(), eBike.getSeatType(), eBike.getRangeEco(), eBike.getRangeNormal(), eBike.getRangeSport(), eBike.getMotorPower(), eBike.getChargeTime(), eBike.getAvailabilityStatus());
+        System.out.printf("|%7d |%15s |%15d |%20s |%15d |%15d |%15d |%15s |%20s |%15s |%15d |%15d |%15d |%15d |%15s |%15s |\n", eBike.getBikeId(), eBike.getBikeModel(), eBike.getTopSpeed(), eBike.getGroundClearance(), eBike.getWheelBase(), eBike.getMaxTorque(), eBike.getPrice(), eBike.getBodyType(), eBike.getInstrumentConsole(), eBike.getSeatType(), eBike.getRangeEco(), eBike.getRangeNormal(), eBike.getRangeSport(), eBike.getMotorPower(), eBike.getChargeTime(), eBike.getBikeStatus());
     }
 
 

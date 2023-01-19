@@ -1,10 +1,10 @@
 package bbm.model.bike;
 
-public class Bike {
+public abstract class Bike {
     private static int id = 1;
     private final int bikeId, topSpeed, groundClearance, wheelBase, maxTorque, price;
     private final String bikeModel, bodyType, instrumentConsole, seatType;
-    private BikeStatus availabilityStatus = BikeStatus.AVAILABLE;
+    private BikeStatus bikeStatus = BikeStatus.AVAILABLE;
 
     public Bike(int topSpeed, int groundClearance, int wheelBase, int maxTorque, int price, String bikeModel, String bodyType, String instrumentConsole, String seatType) {
         this.bikeId = id;
@@ -60,9 +60,9 @@ public class Bike {
     public String getSeatType() {
         return seatType;
     }
-    public BikeStatus getAvailabilityStatus(){return availabilityStatus;}
+    public BikeStatus getBikeStatus(){return bikeStatus;}
 
-    public void setAvailabilityStatus(BikeStatus availabilityStatus) {
-        this.availabilityStatus = availabilityStatus;
+    public void setBikeStatus(BikeStatus bikeStatus) {
+        this.bikeStatus = bikeStatus;
     }
 }

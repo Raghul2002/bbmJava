@@ -1,6 +1,6 @@
 package bbm.model.bike;
 
-public class MBike extends Bike {
+public final class MBike extends Bike {
     private final int mileage, noOfCylinders;
     private final String engineType, displacement, coolingSystem, fuelSupply, gearBox;
 

@@ -2,21 +2,23 @@ package bbm.utility;
 
 import bbm.encryption.IEncryption;
 import bbm.encryption.Encryption;
-import bbm.model.account.SignUpDetails;
 
 import java.util.*;
 
 public final class UtilUserInput {
     static Scanner sc = new Scanner(System.in);
+
     private UtilUserInput() {
     }
 
     public static String getUserName() {
         String userName;
-        do {
-            System.out.println("Enter User Name \t:");
+        System.out.println("Enter User Name \t:");
+        userName = sc.next();
+        while (!Validation.validateString(userName)) {
+            System.out.println("Enter valid input (Min 3 letters)\t:");
             userName = sc.next();
-        } while (!Validation.validateString(userName));
+        }
         return userName;
     }
 
@@ -29,49 +31,61 @@ public final class UtilUserInput {
         return password;
     }
 
-    private static String getFirstName() {
+    public static String getFirstName() {
         String firstName;
-        do {
-            System.out.println("Enter First Name \t:");
+        System.out.println("Enter First Name \t:");
+        firstName = sc.next();
+        while (!Validation.validateString(firstName)) {
+            System.out.println("Enter valid input (Min 3 letters)\t:");
             firstName = sc.next();
-        } while (!Validation.validateString(firstName));
+        }
 
         return firstName;
     }
 
-    private static String getLastName() {
+    public static String getLastName() {
         String lastName;
-        do {
-            System.out.println("Enter Last Name \t:");
+        System.out.println("Enter Last Name \t:");
+        lastName = sc.next();
+        while (!Validation.validateString(lastName)) {
+            System.out.println("Enter valid input (Min 3 letters)\t:");
             lastName = sc.next();
-        } while (!Validation.validateString(lastName));
-
+        }
         return lastName;
     }
 
-    private static String getEmailId() {
+    public static String getEmailId() {
         String emailId;
-        do {
-            System.out.println("Enter Email \t:");
+        System.out.println("Enter Email \t:");
+        emailId = sc.next();
+        while (!Validation.validateEmail(emailId)) {
+            System.out.println("Enter valid email\t:");
             emailId = sc.next();
-        } while (!Validation.validateEmail(emailId));
+        }
         return emailId;
 
     }
 
-    private static String getPhoneNo() {
+    public static String getPhoneNo() {
         String phoneNo;
-        do {
-            System.out.println("Enter Phone number \t:");
+        System.out.println("Enter Phone number \t:");
+        phoneNo = sc.next();
+        while (!Validation.validatePhoneNo(phoneNo)) {
+            System.out.println("Enter valid input (Enter 10 digit number!!)\t:");
             phoneNo = sc.next();
-        } while (!Validation.validatePhoneNo(phoneNo));
+        }
 
         return phoneNo;
     }
 
-
-    public static SignUpDetails getSignUpDetails() {
-        System.out.println("Enter sign up details :");
-        return new SignUpDetails(getFirstName(), getLastName(), getUserName(), getPassword(), getEmailId(), getPhoneNo());
+    public static String getNumberForSwitch(int enumLength) {
+        String val;
+        System.out.println("Enter number :");
+        val = sc.next();
+        while (!Validation.validateNumber(val, enumLength)) {
+            System.out.println("Enter valid number :");
+            val = sc.next();
+        }
+        return val;
     }
 }

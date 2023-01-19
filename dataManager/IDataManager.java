@@ -10,7 +10,7 @@ import bbm.model.bike.MBike;
 
 import java.util.List;
 
-public interface DataManager {
+public interface IDataManager {
     void addUser(Customer customer);
 
     void addUser(Manager manager);
@@ -22,7 +22,6 @@ public interface DataManager {
     void addBike(MBike mBike, Manager manager);
     void removeBike(EBike eBike,Manager manager);
     void removeBike(MBike mBike,Manager manager);
-    List<Owner> getOwnerList();
     List<Customer> getCustomerList();
     List<SalesExecutive> getSalesExecutiveList();
     List<Manager> getManagerList();
@@ -31,4 +30,5 @@ public interface DataManager {
     void addOrderDetails(SalesRecord salesRecord);
     List<SalesRecord> getOrderDetailsList();
 
+    List<Owner> getOwnerList();
 }

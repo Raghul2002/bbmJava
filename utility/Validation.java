@@ -27,7 +27,7 @@ public final class Validation {
         return validate(regex,email);
     }
     public static boolean validateNumber(String num,int length){
-        String regex = "[0-9]{1,2}$";
+        String regex = "[1-9]{1}[0-9]?";
         if(validate(regex,num)) {
             return Integer.parseInt(num) <= length;
         }

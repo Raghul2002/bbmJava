@@ -1,27 +1,45 @@
 package bbm.customer;
 
-import bbm.manager.BikeManagerController;
+import bbm.Factory.BBMFactory;
+import bbm.model.bike.BikeTypes;
+import bbm.SalesRecord.SalesRecord;
+import bbm.application.CustomerAccess;
 import bbm.model.account.Customer;
 import bbm.utility.UserView.UtilCustomerView;
+import bbm.utility.UtilBikeView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerController {
-    Customer customer ;
-    CustomerController(Customer customer){
+public final class CustomerController {
+    private final Customer customer;
+    private final CustomerAccess customerAccess;
+
+    public CustomerController(Customer customer,CustomerAccess customerAccess) {
         this.customer = customer;
+        this.customerAccess = customerAccess;
     }
-    BikeManagerController bikeManagerController = new BikeManagerController();
-    protected void showPersonalDetails(){
+
+
+    public void showPersonalDetails() {
         List<Customer> userList = new ArrayList<>();
         userList.add(this.customer);
         UtilCustomerView.showCustomerDetails(userList);
     }
-    protected void viewAvailableBike(){
-        bikeManagerController.viewAvailableBike();
+
+    public void viewAvailableBike() {
+        UtilBikeView.printEBikeList(customerAccess.getAvailableEBike());
+        UtilBikeView.printMBikeList(customerAccess.getAvailableMBike());
     }
-//    boolean buyBike(){
-//
-//    }
+
+
+    public boolean compareBike(BikeTypes bikeType, int bikeId1, int bikeId2) {
+        return customerAccess.compareBike(bikeType, bikeId1, bikeId2);
+    }
+
+    public boolean buyBike(String customerId, int bikeId, BikeTypes bikeType) {
+        SalesRecord salesRecord = new SalesRecord(bikeId, customerId);
+        return customerAccess.addBookingOrder(salesRecord, bikeType);
+    }
+
 }
