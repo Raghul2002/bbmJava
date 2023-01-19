@@ -1,6 +1,5 @@
 package bbm.salesExecutive;
 
-import bbm.Factory.BBMFactory;
 import bbm.application.SalesExecutiveAccess;
 import bbm.model.account.SalesExecutive;
 import bbm.utility.UserView.UtilSalesExecutiveView;

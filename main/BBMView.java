@@ -6,7 +6,7 @@ import bbm.model.account.Owner;
 import bbm.model.account.SalesExecutive;
 import bbm.utility.UtilUserInput;
 
-public class BBMView {
+public final class BBMView {
     enum UserCategory {
         OWNER,
         MANAGER,

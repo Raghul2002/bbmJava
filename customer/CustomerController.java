@@ -1,6 +1,5 @@
 package bbm.customer;
 
-import bbm.Factory.BBMFactory;
 import bbm.model.bike.BikeTypes;
 import bbm.SalesRecord.SalesRecord;
 import bbm.application.CustomerAccess;

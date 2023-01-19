@@ -1,6 +1,5 @@
 package bbm.owner;
 
-import bbm.Factory.BBMFactory;
 import bbm.utility.UserView.UtilCustomerView;
 import bbm.utility.UserView.UtilManagerView;
 import bbm.utility.UserView.UtilSalesExecutiveView;

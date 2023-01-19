@@ -22,8 +22,8 @@ import bbm.owner.OwnerView;
 import bbm.salesExecutive.SalesExecutiveController;
 import bbm.salesExecutive.SalesExecutiveView;
 
-public class BBMFactory {
-    private BBMFactory(){}
+public class InstanceFactory {
+    private InstanceFactory(){}
     public static IDatabase getIDatabaseInstance(){
         return Database.getInstance();
     }

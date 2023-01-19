@@ -1,6 +1,5 @@
 package bbm.manager;
 
-import bbm.Factory.BBMFactory;
 import bbm.application.ManagerAccess;
 import bbm.model.account.Manager;
 import bbm.model.bike.EBike;

@@ -1,6 +1,6 @@
 package bbm.application;
 
-import bbm.Factory.BBMFactory;
+import bbm.Factory.InstanceFactory;
 import bbm.model.account.Owner;
 import bbm.model.bike.BikeTypes;
 import bbm.bikeManager.BikeManager;
@@ -19,7 +19,7 @@ import bbm.model.bike.MBike;
 import java.util.List;
 
 public final class ApplicationManager implements OwnerAccess, ManagerAccess, CustomerAccess, SalesExecutiveAccess, BBMAccess {
-    IDataManager dataManager = BBMFactory.getIDataManagerInstance();
+    IDataManager dataManager = InstanceFactory.getIDataManagerInstance();
     BikeManager<EBike> eBikeManager = new EBikeManager(dataManager);
     BikeManager<MBike> mBikeManager = new MBikeManager(dataManager);
 
@@ -66,7 +66,7 @@ public final class ApplicationManager implements OwnerAccess, ManagerAccess, Cus
     }
 
     public void confirmBookingOrders(SalesExecutive salesExecutive) {
-        int bikeId = 0;
+        int bikeId ;
         Bike bike = getBike(0);
         for (SalesRecord salesRecord : dataManager.getOrderDetailsList()) {
             if (salesRecord.getSalesExecutiveId() == null) {

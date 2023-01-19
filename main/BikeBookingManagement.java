@@ -1,6 +1,6 @@
 package bbm.main;
 
-import bbm.Factory.BBMFactory;
+import bbm.Factory.InstanceFactory;
 import bbm.application.BBMAccess;
 import bbm.database.Database;
 import bbm.database.IDatabase;
@@ -21,9 +21,9 @@ public final class BikeBookingManagement {
         db.addBike(new EBike(5, 4, 3, 2, 1, "5", "4", "3", "2", 1, 5, 4, 3, 2));
     }
     public static void main(String[] args) {
-        BBMAccess bbmAccess = BBMFactory.getBBMAccessInstance();
-        BBMController bbmController = BBMFactory.getBBMControllerInstance(bbmAccess);
-        BBMView bbmView = BBMFactory.getBBMViewInstance(bbmController);
+        BBMAccess bbmAccess = InstanceFactory.getBBMAccessInstance();
+        BBMController bbmController = InstanceFactory.getBBMControllerInstance(bbmAccess);
+        BBMView bbmView = InstanceFactory.getBBMViewInstance(bbmController);
         bbmView.renderMainView();
     }
 }

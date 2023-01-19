@@ -1,10 +1,6 @@
 package bbm.salesExecutive;
 
-import bbm.Factory.BBMFactory;
-import bbm.model.account.SalesExecutive;
 import bbm.utility.UtilUserInput;
-
-import java.util.Scanner;
 
 public final class SalesExecutiveView {
     SalesExecutiveController salesExecutiveController;

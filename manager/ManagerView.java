@@ -1,8 +1,5 @@
 package bbm.manager;
 
-import bbm.Factory.BBMFactory;
-import bbm.main.BBMView;
-import bbm.model.account.Manager;
 import bbm.model.bike.BikeTypes;
 import bbm.utility.UtilBikeInput;
 import bbm.utility.UtilUserInput;

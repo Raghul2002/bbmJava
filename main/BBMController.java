@@ -1,6 +1,6 @@
 package bbm.main;
 
-import bbm.Factory.BBMFactory;
+import bbm.Factory.InstanceFactory;
 import bbm.application.*;
 import bbm.customer.CustomerController;
 import bbm.customer.CustomerView;
@@ -38,9 +38,9 @@ public final class BBMController {
     public boolean renderOwnerPortal(Owner owner) {
         if (owner == null)
             return false;
-        OwnerAccess ownerAccess = BBMFactory.getOwnerAccessInstance();
-        OwnerController ownerController = BBMFactory.getOwnerControllerInstance(owner, ownerAccess);
-        OwnerView ownerView = BBMFactory.getOwnerViewInstance(ownerController);
+        OwnerAccess ownerAccess = InstanceFactory.getOwnerAccessInstance();
+        OwnerController ownerController = InstanceFactory.getOwnerControllerInstance(owner, ownerAccess);
+        OwnerView ownerView = InstanceFactory.getOwnerViewInstance(ownerController);
         ownerView.viewPortal();
         return true;
     }
@@ -48,9 +48,9 @@ public final class BBMController {
     public boolean renderManagerPortal(Manager manager) {
         if (manager == null)
             return false;
-        ManagerAccess managerAccess = BBMFactory.getManagerAccessInstance();
-        ManagerController managerController = BBMFactory.getManagerControllerInstance(manager,managerAccess);
-        ManagerView managerView = BBMFactory.getManagerViewInstance(managerController);
+        ManagerAccess managerAccess = InstanceFactory.getManagerAccessInstance();
+        ManagerController managerController = InstanceFactory.getManagerControllerInstance(manager,managerAccess);
+        ManagerView managerView = InstanceFactory.getManagerViewInstance(managerController);
         managerView.viewPortal();
         return true;
     }
@@ -58,9 +58,9 @@ public final class BBMController {
     public boolean renderSalesExecutivePortal(SalesExecutive salesExecutive) {
         if (salesExecutive == null)
             return false;
-        SalesExecutiveAccess salesExecutiveAccess = BBMFactory.getSalesExecutiveAccessInstance();
-        SalesExecutiveController salesExecutiveController = BBMFactory.getSalesExecutiveControllerInstance(salesExecutive,salesExecutiveAccess);
-        SalesExecutiveView salesExecutiveView = BBMFactory.getSalesExecutiveViewInstance(salesExecutiveController);
+        SalesExecutiveAccess salesExecutiveAccess = InstanceFactory.getSalesExecutiveAccessInstance();
+        SalesExecutiveController salesExecutiveController = InstanceFactory.getSalesExecutiveControllerInstance(salesExecutive,salesExecutiveAccess);
+        SalesExecutiveView salesExecutiveView = InstanceFactory.getSalesExecutiveViewInstance(salesExecutiveController);
         salesExecutiveView.viewPortal();
         return true;
     }
@@ -68,9 +68,9 @@ public final class BBMController {
     public boolean renderCustomerPortal(Customer customer) {
         if (customer == null)
             return false;
-        CustomerAccess customerAccess = BBMFactory.getCustomerAccessInstance();
-        CustomerController customerController = BBMFactory.getCustomerControllerInstance(customer, customerAccess);
-        CustomerView customerView = BBMFactory.getCustomerViewInstance(customer, customerController);
+        CustomerAccess customerAccess = InstanceFactory.getCustomerAccessInstance();
+        CustomerController customerController = InstanceFactory.getCustomerControllerInstance(customer, customerAccess);
+        CustomerView customerView = InstanceFactory.getCustomerViewInstance(customer, customerController);
         customerView.viewPortal();
         return true;
     }

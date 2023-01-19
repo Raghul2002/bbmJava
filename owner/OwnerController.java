@@ -1,6 +1,5 @@
 package bbm.owner;
 
-import bbm.Factory.BBMFactory;
 import bbm.application.OwnerAccess;
 import bbm.model.account.*;
 import bbm.utility.UserView.UtilOwnerView;
