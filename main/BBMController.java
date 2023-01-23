@@ -2,17 +2,17 @@ package bbm.main;
 
 import bbm.Factory.InstanceFactory;
 import bbm.application.*;
-import bbm.customer.CustomerController;
-import bbm.customer.CustomerView;
-import bbm.manager.ManagerController;
-import bbm.manager.ManagerView;
+import bbm.customer.ICustomerController;
+import bbm.customer.ICustomerView;
+import bbm.manager.IManagerController;
+import bbm.manager.IManagerView;
 import bbm.model.account.*;
-import bbm.owner.OwnerController;
-import bbm.owner.OwnerView;
-import bbm.salesExecutive.SalesExecutiveController;
-import bbm.salesExecutive.SalesExecutiveView;
+import bbm.owner.IOwnerController;
+import bbm.owner.IOwnerView;
+import bbm.salesExecutive.ISalesExecutiveController;
+import bbm.salesExecutive.ISalesExecutiveView;
 
-public final class BBMController {
+public final class BBMController implements IBBMController {
     private final BBMAccess bbmAccess;
 
     public BBMController(BBMAccess bbmAccess) {
@@ -39,8 +39,8 @@ public final class BBMController {
         if (owner == null)
             return false;
         OwnerAccess ownerAccess = InstanceFactory.getOwnerAccessInstance();
-        OwnerController ownerController = InstanceFactory.getOwnerControllerInstance(owner, ownerAccess);
-        OwnerView ownerView = InstanceFactory.getOwnerViewInstance(ownerController);
+        IOwnerController ownerController = InstanceFactory.getOwnerControllerInstance(owner, ownerAccess);
+        IOwnerView ownerView = InstanceFactory.getOwnerViewInstance(ownerController);
         ownerView.viewPortal();
         return true;
     }
@@ -49,8 +49,8 @@ public final class BBMController {
         if (manager == null)
             return false;
         ManagerAccess managerAccess = InstanceFactory.getManagerAccessInstance();
-        ManagerController managerController = InstanceFactory.getManagerControllerInstance(manager,managerAccess);
-        ManagerView managerView = InstanceFactory.getManagerViewInstance(managerController);
+        IManagerController managerController = InstanceFactory.getManagerControllerInstance(manager, managerAccess);
+        IManagerView managerView = InstanceFactory.getManagerViewInstance(managerController);
         managerView.viewPortal();
         return true;
     }
@@ -59,8 +59,8 @@ public final class BBMController {
         if (salesExecutive == null)
             return false;
         SalesExecutiveAccess salesExecutiveAccess = InstanceFactory.getSalesExecutiveAccessInstance();
-        SalesExecutiveController salesExecutiveController = InstanceFactory.getSalesExecutiveControllerInstance(salesExecutive,salesExecutiveAccess);
-        SalesExecutiveView salesExecutiveView = InstanceFactory.getSalesExecutiveViewInstance(salesExecutiveController);
+        ISalesExecutiveController salesExecutiveController = InstanceFactory.getSalesExecutiveControllerInstance(salesExecutive, salesExecutiveAccess);
+        ISalesExecutiveView salesExecutiveView = InstanceFactory.getSalesExecutiveViewInstance(salesExecutiveController);
         salesExecutiveView.viewPortal();
         return true;
     }
@@ -69,12 +69,11 @@ public final class BBMController {
         if (customer == null)
             return false;
         CustomerAccess customerAccess = InstanceFactory.getCustomerAccessInstance();
-        CustomerController customerController = InstanceFactory.getCustomerControllerInstance(customer, customerAccess);
-        CustomerView customerView = InstanceFactory.getCustomerViewInstance(customer, customerController);
+        ICustomerController customerController = InstanceFactory.getCustomerControllerInstance(customer, customerAccess);
+        ICustomerView customerView = InstanceFactory.getCustomerViewInstance(customer, customerController);
         customerView.viewPortal();
         return true;
     }
-
 
     public void addCustomer(String firstName, String lastName, String userName, String password, String emailId, String phoneNo) {
         Customer customer = new Customer(firstName, lastName, userName, password, emailId, phoneNo);

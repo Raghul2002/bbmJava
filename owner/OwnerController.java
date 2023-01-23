@@ -9,7 +9,7 @@ import bbm.utility.UtilOrderDetailsView;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class OwnerController {
+public final class OwnerController implements IOwnerController{
     private final Owner owner;
     private final OwnerAccess ownerAccess;
 
@@ -17,33 +17,33 @@ public final class OwnerController {
         this.owner = owner;
         this.ownerAccess = ownerAccess;
     }
-    void addManager(String firstName, String lastName, String userName, String password, String emailId, String phoneNo) {
+    public void addManager(String firstName, String lastName, String userName, String password, String emailId, String phoneNo) {
         Manager manager = new Manager(firstName, lastName, userName, password, emailId, phoneNo);
         ownerAccess.addUser(manager);
     }
 
-    void addSalesExecutive(String firstName, String lastName, String userName, String password, String emailId, String phoneNo) {
+    public void addSalesExecutive(String firstName, String lastName, String userName, String password, String emailId, String phoneNo) {
         SalesExecutive salesExecutive = new SalesExecutive(firstName, lastName, userName, password, emailId, phoneNo);
         ownerAccess.addUser(salesExecutive);
     }
 
-    boolean removeManger(String id) {
+    public boolean removeManger(String id) {
         return ownerAccess.removeManager(id);
     }
 
-    boolean removeSalesExecutive(String id) {
+    public boolean removeSalesExecutive(String id) {
         return ownerAccess.removeSalesExecutive(id);
     }
 
-    List<Manager> getManagerList() {
+    public List<Manager> getManagerList() {
         return ownerAccess.getManagerList();
     }
 
-    List<SalesExecutive> getSalesExecutiveList() {
+    public List<SalesExecutive> getSalesExecutiveList() {
         return ownerAccess.getSalesExecutiveList();
     }
 
-    List<Customer> getCustomerList() {
+    public List<Customer> getCustomerList() {
         return ownerAccess.getCustomerList();
     }
 
@@ -58,11 +58,11 @@ public final class OwnerController {
         UtilBikeView.printMBikeList(ownerAccess.getAvailableMBike());
     }
 
-    void viewSoldDetails() {
+    public void viewSoldDetails() {
         UtilOrderDetailsView.viewOrderDetails(ownerAccess.getSoldDetails());
     }
 
-    void viewSoldBike() {
+    public void viewSoldBike() {
         UtilBikeView.printEBikeList(ownerAccess.getSoldEBike());
         UtilBikeView.printMBikeList(ownerAccess.getSoldMBike());
     }

@@ -2,8 +2,8 @@ package bbm.salesExecutive;
 
 import bbm.utility.UtilUserInput;
 
-public final class SalesExecutiveView {
-    SalesExecutiveController salesExecutiveController;
+public final class SalesExecutiveView implements ISalesExecutiveView{
+    ISalesExecutiveController salesExecutiveController;
     enum SalesExecutiveRoles {
         VIEW_BIKE,
         VIEW_BIKE_ORDERS,
@@ -12,7 +12,7 @@ public final class SalesExecutiveView {
         LOGOUT,
     }
 
-    public SalesExecutiveView(SalesExecutiveController salesExecutiveController) {
+    public SalesExecutiveView(ISalesExecutiveController salesExecutiveController) {
         this.salesExecutiveController = salesExecutiveController;
     }
 

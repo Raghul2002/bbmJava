@@ -1,16 +1,19 @@
 package bbm.customer;
 
+import bbm.model.bike.Bike;
 import bbm.model.bike.BikeTypes;
 import bbm.SalesRecord.SalesRecord;
 import bbm.application.CustomerAccess;
 import bbm.model.account.Customer;
+import bbm.model.bike.EBike;
+import bbm.model.bike.MBike;
 import bbm.utility.UserView.UtilCustomerView;
 import bbm.utility.UtilBikeView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public final class CustomerController {
+public final class CustomerController implements ICustomerController {
     private final Customer customer;
     private final CustomerAccess customerAccess;
 
@@ -40,5 +43,13 @@ public final class CustomerController {
         SalesRecord salesRecord = new SalesRecord(bikeId, customerId);
         return customerAccess.addBookingOrder(salesRecord, bikeType);
     }
-
+    public List<EBike> getCustomerEBikeStatus(){
+        List<Bike> bikeList = new ArrayList<>(customerAccess.getOwnedBike(customer.getCustomerId()));
+        bikeList.removeIf(bike -> bike instanceof MBike);
+        List<? extends Bike> eBikeList = new ArrayList<>(bikeList);
+        return null;
+    }
+    public List<MBike> getCustomerMBikeStatus(){
+        return null;
+    }
 }

@@ -17,6 +17,7 @@ public interface OwnerAccess {
     List<MBike> getAvailableMBike();
 
     List<EBike> getAvailableEBike();
+
     List<SalesRecord> getSoldDetails();
 
     void addUser(Manager manager);

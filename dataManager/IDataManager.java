@@ -27,8 +27,8 @@ public interface IDataManager {
     List<Manager> getManagerList();
     List<EBike> getEBikeList();
     List<MBike> getMBikeList();
-    void addOrderDetails(SalesRecord salesRecord);
-    List<SalesRecord> getOrderDetailsList();
+    void addSalesDetails(SalesRecord salesRecord);
+    List<SalesRecord> getSalesDetailsList();
 
     List<Owner> getOwnerList();
 }

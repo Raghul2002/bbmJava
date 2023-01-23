@@ -6,7 +6,7 @@ import bbm.model.account.Owner;
 import bbm.model.account.SalesExecutive;
 import bbm.utility.UtilUserInput;
 
-public final class BBMView {
+public final class BBMView implements IBBMView{
     enum UserCategory {
         OWNER,
         MANAGER,
@@ -20,9 +20,9 @@ public final class BBMView {
         SING_IN
     }
 
-    final BBMController bbmController;
+    final IBBMController bbmController;
 
-    public BBMView(BBMController bbmController) {
+    public BBMView(IBBMController bbmController) {
         this.bbmController = bbmController;
     }
 

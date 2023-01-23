@@ -5,9 +5,9 @@ import bbm.model.account.Customer;
 import bbm.utility.UtilBikeInput;
 import bbm.utility.UtilUserInput;
 
-public final class CustomerView {
+public final class CustomerView implements ICustomerView{
     private final Customer customer;
-    private final CustomerController customerController;
+    private final ICustomerController customerController;
 
     enum CustomerRoles {
         VIEW_BIKE,
@@ -17,7 +17,7 @@ public final class CustomerView {
         LOGOUT;
     }
 
-    public CustomerView(Customer customer,CustomerController customerController) {
+    public CustomerView(Customer customer,ICustomerController customerController) {
         this.customer = customer;
         this.customerController = customerController;
     }

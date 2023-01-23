@@ -56,7 +56,7 @@ public final class MBikeManager implements BikeManager<MBike> {
     public boolean addBookingOrder(SalesRecord salesRecord) {
         for (Bike bike : dataManager.getMBikeList())
             if (salesRecord.getBikeId() == bike.getBikeId()) {
-                dataManager.addOrderDetails(salesRecord);
+                dataManager.addSalesDetails(salesRecord);
                 bike.setBikeStatus(BikeStatus.RESERVED);
                 return true;
             }

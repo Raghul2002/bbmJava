@@ -10,8 +10,8 @@ import bbm.model.account.*;
 import java.util.List;
 import java.util.Scanner;
 
-public final class OwnerView {
-    private final OwnerController ownerController;
+public final class OwnerView implements IOwnerView{
+    private final IOwnerController ownerController;
     private final Scanner sc = new Scanner(System.in);
 
     enum OwnerRoles {
@@ -29,7 +29,7 @@ public final class OwnerView {
         LOGOUT,
     }
 
-    public OwnerView(OwnerController ownerController) {
+    public OwnerView(IOwnerController ownerController) {
         this.ownerController = ownerController;
     }
 

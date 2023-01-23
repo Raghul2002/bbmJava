@@ -10,7 +10,7 @@ import bbm.utility.UtilBikeView;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class ManagerController {
+public final class ManagerController implements IManagerController{
     private final Manager manager;
     private final ManagerAccess managerAccess;
 

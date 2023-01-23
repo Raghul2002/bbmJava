@@ -1,6 +1,7 @@
 package bbm.application;
 
 import bbm.Factory.InstanceFactory;
+import bbm.Factory.enumeration.IDataManagerTypes;
 import bbm.model.account.Owner;
 import bbm.model.bike.BikeTypes;
 import bbm.bikeManager.BikeManager;
@@ -16,10 +17,11 @@ import bbm.model.bike.BikeStatus;
 import bbm.model.bike.EBike;
 import bbm.model.bike.MBike;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class ApplicationManager implements OwnerAccess, ManagerAccess, CustomerAccess, SalesExecutiveAccess, BBMAccess {
-    IDataManager dataManager = InstanceFactory.getIDataManagerInstance();
+    IDataManager dataManager = InstanceFactory.getIDataManagerInstance(IDataManagerTypes.DataManager);
     BikeManager<EBike> eBikeManager = new EBikeManager(dataManager);
     BikeManager<MBike> mBikeManager = new MBikeManager(dataManager);
 
@@ -68,7 +70,7 @@ public final class ApplicationManager implements OwnerAccess, ManagerAccess, Cus
     public void confirmBookingOrders(SalesExecutive salesExecutive) {
         int bikeId ;
         Bike bike = getBike(0);
-        for (SalesRecord salesRecord : dataManager.getOrderDetailsList()) {
+        for (SalesRecord salesRecord : dataManager.getSalesDetailsList()) {
             if (salesRecord.getSalesExecutiveId() == null) {
                 salesRecord.setSalesExecutiveId(salesExecutive.getSalesExecutiveId());
                 bikeId = salesRecord.getBikeId();
@@ -85,7 +87,7 @@ public final class ApplicationManager implements OwnerAccess, ManagerAccess, Cus
     }
 
     public List<SalesRecord> getSoldDetails() {
-        return (dataManager.getOrderDetailsList());
+        return (dataManager.getSalesDetailsList());
     }
 
     @Override
@@ -173,6 +175,20 @@ public final class ApplicationManager implements OwnerAccess, ManagerAccess, Cus
         }
         return true;
     }
+
+    @Override
+    public List<Bike> getOwnedBike(String customerId) {
+        List<Bike> bikes = new ArrayList<>();
+        List<SalesRecord> salesRecordList =  dataManager.getSalesDetailsList();
+        for(SalesRecord salesRecord:salesRecordList){
+            if(salesRecord.getSalesExecutiveId().equals(customerId)){
+                bikes.add(getBike(salesRecord.getBikeId()));
+            }
+        }
+        return bikes;
+    }
+
+
     public Customer authenticateCustomer(String userName, String password) {
         List<Customer> customerList = dataManager.getCustomerList();
         for (Customer i : customerList)

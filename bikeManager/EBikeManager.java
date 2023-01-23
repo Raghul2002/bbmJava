@@ -57,7 +57,7 @@ public final class EBikeManager implements BikeManager<EBike> {
     public boolean addBookingOrder(SalesRecord salesRecord) {
         for (Bike bike : dataManager.getEBikeList())
             if (salesRecord.getBikeId() == bike.getBikeId()) {
-                dataManager.addOrderDetails(salesRecord);
+                dataManager.addSalesDetails(salesRecord);
                 bike.setBikeStatus(BikeStatus.RESERVED);
                 return true;
             }

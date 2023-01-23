@@ -6,7 +6,7 @@ import bbm.utility.UtilUserInput;
 
 import java.util.Scanner;
 
-public final class ManagerView {
+public final class ManagerView implements IManagerView{
     enum ManagerRoles {
         ADD_BIKE,
         REMOVE_BIKE,
@@ -15,9 +15,9 @@ public final class ManagerView {
         LOGOUT,
     }
 
-    private final ManagerController managerController;
+    private final IManagerController managerController;
 
-    public ManagerView(ManagerController managerController) {
+    public ManagerView(IManagerController managerController) {
         this.managerController = managerController;
     }
 

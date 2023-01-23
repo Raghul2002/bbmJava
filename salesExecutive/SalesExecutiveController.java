@@ -8,7 +8,7 @@ import bbm.utility.UtilBikeView;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class SalesExecutiveController {
+public final class SalesExecutiveController implements ISalesExecutiveController{
     SalesExecutive salesExecutive;
     SalesExecutiveAccess salesExecutiveAccess;
 
