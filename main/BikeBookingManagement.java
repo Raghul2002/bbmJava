@@ -1,16 +1,19 @@
 package bbm.main;
 
-import bbm.Factory.enumeration.DatabaseTypes;
-import bbm.Factory.InstanceFactory;
+import bbm.factory.enumeration.accessEnum.BBMAccessImplTypes;
+import bbm.factory.enumeration.DatabaseImplTypes;
+import bbm.factory.InstanceFactory;
 import bbm.application.BBMAccess;
 import bbm.database.Database;
+import bbm.factory.enumeration.controllerEnum.BBMControllerImplTypes;
+import bbm.factory.enumeration.viewEnum.BBMViewImplTypes;
 import bbm.model.account.*;
 import bbm.model.bike.EBike;
 import bbm.model.bike.MBike;
 
 public final class BikeBookingManagement {
     static {
-        Database db = InstanceFactory.getDatabaseInstance(DatabaseTypes.ListDatabase);
+        Database db = InstanceFactory.getDatabaseInstance(DatabaseImplTypes.ListDatabase);
         assert db != null;
         db.addUser(new Manager("m", "m", "manager", "r", "@gmail", "3456234234L"));
         db.addUser(new Owner("m", "m", "owner", "t", "@gmail", "3456234234L"));
@@ -23,9 +26,10 @@ public final class BikeBookingManagement {
     }
 
     public static void main(String[] args) {
-        BBMAccess bbmAccess = InstanceFactory.getBBMAccessInstance();
-        IBBMController bbmController = InstanceFactory.getBBMControllerInstance(bbmAccess);
-        IBBMView bbmView = InstanceFactory.getBBMViewInstance(bbmController);
-        bbmView.renderMainView();
+        BBMAccess bbmAccess = InstanceFactory.getBBMAccessInstance(BBMAccessImplTypes.ApplicationManager);
+        IBBMController bbmController = InstanceFactory.getBBMControllerInstance(BBMControllerImplTypes.BBMController,bbmAccess);
+        IBBMView bbmView = InstanceFactory.getBBMViewInstance(BBMViewImplTypes.BBMView,bbmController);
+        if (bbmView != null)
+            bbmView.renderMainView();
     }
 }

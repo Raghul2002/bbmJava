@@ -1,7 +1,7 @@
 package bbm.application;
 
-import bbm.Factory.InstanceFactory;
-import bbm.Factory.enumeration.IDataManagerTypes;
+import bbm.factory.InstanceFactory;
+import bbm.factory.enumeration.IDataManagerImplTypes;
 import bbm.model.account.Owner;
 import bbm.model.bike.BikeTypes;
 import bbm.bikeManager.BikeManager;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class ApplicationManager implements OwnerAccess, ManagerAccess, CustomerAccess, SalesExecutiveAccess, BBMAccess {
-    IDataManager dataManager = InstanceFactory.getIDataManagerInstance(IDataManagerTypes.DataManager);
+    IDataManager dataManager = InstanceFactory.getIDataManagerInstance(IDataManagerImplTypes.DataManager);
     BikeManager<EBike> eBikeManager = new EBikeManager(dataManager);
     BikeManager<MBike> mBikeManager = new MBikeManager(dataManager);
 

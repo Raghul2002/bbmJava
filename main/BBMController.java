@@ -1,9 +1,21 @@
 package bbm.main;
 
-import bbm.Factory.InstanceFactory;
+import bbm.factory.InstanceFactory;
 import bbm.application.*;
 import bbm.customer.ICustomerController;
 import bbm.customer.ICustomerView;
+import bbm.factory.enumeration.accessEnum.CustomerAccessImplTypes;
+import bbm.factory.enumeration.accessEnum.ManagerAccessImplTypes;
+import bbm.factory.enumeration.accessEnum.OwnerAccessImplTypes;
+import bbm.factory.enumeration.accessEnum.SalesExecutiveAccessImplTypes;
+import bbm.factory.enumeration.controllerEnum.CustomerControllerImplTypes;
+import bbm.factory.enumeration.controllerEnum.ManagerControllerImplTypes;
+import bbm.factory.enumeration.controllerEnum.OwnerControllerImplTypes;
+import bbm.factory.enumeration.controllerEnum.SalesExecutiveControllerImplTypes;
+import bbm.factory.enumeration.viewEnum.CustomerViewImplTypes;
+import bbm.factory.enumeration.viewEnum.ManagerViewImplTypes;
+import bbm.factory.enumeration.viewEnum.OwnerViewImplTypes;
+import bbm.factory.enumeration.viewEnum.SalesExecutiveViewImplTypes;
 import bbm.manager.IManagerController;
 import bbm.manager.IManagerView;
 import bbm.model.account.*;
@@ -38,40 +50,44 @@ public final class BBMController implements IBBMController {
     public boolean renderOwnerPortal(Owner owner) {
         if (owner == null)
             return false;
-        OwnerAccess ownerAccess = InstanceFactory.getOwnerAccessInstance();
-        IOwnerController ownerController = InstanceFactory.getOwnerControllerInstance(owner, ownerAccess);
-        IOwnerView ownerView = InstanceFactory.getOwnerViewInstance(ownerController);
-        ownerView.viewPortal();
+        OwnerAccess ownerAccess = InstanceFactory.getOwnerAccessInstance(OwnerAccessImplTypes.ApplicationManager);
+        IOwnerController ownerController = InstanceFactory.getOwnerControllerInstance(OwnerControllerImplTypes.OwnerController,owner, ownerAccess);
+        IOwnerView ownerView = InstanceFactory.getOwnerViewInstance(OwnerViewImplTypes.OwnerView,ownerController);
+        if( ownerView != null)
+            ownerView.viewPortal();
         return true;
     }
 
     public boolean renderManagerPortal(Manager manager) {
         if (manager == null)
             return false;
-        ManagerAccess managerAccess = InstanceFactory.getManagerAccessInstance();
-        IManagerController managerController = InstanceFactory.getManagerControllerInstance(manager, managerAccess);
-        IManagerView managerView = InstanceFactory.getManagerViewInstance(managerController);
-        managerView.viewPortal();
+        ManagerAccess managerAccess = InstanceFactory.getManagerAccessInstance(ManagerAccessImplTypes.ApplicationManager);
+        IManagerController managerController = InstanceFactory.getManagerControllerInstance(ManagerControllerImplTypes.ManagerController,manager, managerAccess);
+        IManagerView managerView = InstanceFactory.getManagerViewInstance(ManagerViewImplTypes.ManagerView,managerController);
+        if(managerView != null)
+            managerView.viewPortal();
         return true;
     }
 
     public boolean renderSalesExecutivePortal(SalesExecutive salesExecutive) {
         if (salesExecutive == null)
             return false;
-        SalesExecutiveAccess salesExecutiveAccess = InstanceFactory.getSalesExecutiveAccessInstance();
-        ISalesExecutiveController salesExecutiveController = InstanceFactory.getSalesExecutiveControllerInstance(salesExecutive, salesExecutiveAccess);
-        ISalesExecutiveView salesExecutiveView = InstanceFactory.getSalesExecutiveViewInstance(salesExecutiveController);
-        salesExecutiveView.viewPortal();
+        SalesExecutiveAccess salesExecutiveAccess = InstanceFactory.getSalesExecutiveAccessInstance(SalesExecutiveAccessImplTypes.ApplicationManager);
+        ISalesExecutiveController salesExecutiveController = InstanceFactory.getSalesExecutiveControllerInstance(SalesExecutiveControllerImplTypes.SalesExecutiveController,salesExecutive, salesExecutiveAccess);
+        ISalesExecutiveView salesExecutiveView = InstanceFactory.getSalesExecutiveViewInstance(SalesExecutiveViewImplTypes.SalesExecutiveView,salesExecutiveController);
+        if (salesExecutiveView != null)
+            salesExecutiveView.viewPortal();
         return true;
     }
 
     public boolean renderCustomerPortal(Customer customer) {
         if (customer == null)
             return false;
-        CustomerAccess customerAccess = InstanceFactory.getCustomerAccessInstance();
-        ICustomerController customerController = InstanceFactory.getCustomerControllerInstance(customer, customerAccess);
-        ICustomerView customerView = InstanceFactory.getCustomerViewInstance(customer, customerController);
-        customerView.viewPortal();
+        CustomerAccess customerAccess = InstanceFactory.getCustomerAccessInstance(CustomerAccessImplTypes.ApplicationManager);
+        ICustomerController customerController = InstanceFactory.getCustomerControllerInstance(CustomerControllerImplTypes.CustomerController,customer, customerAccess);
+        ICustomerView customerView = InstanceFactory.getCustomerViewInstance(CustomerViewImplTypes.CustomerView,customer, customerController);
+        if (customerView != null)
+            customerView.viewPortal();
         return true;
     }
 

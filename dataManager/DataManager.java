@@ -1,7 +1,7 @@
 package bbm.dataManager;
 
-import bbm.Factory.enumeration.DatabaseTypes;
-import bbm.Factory.InstanceFactory;
+import bbm.factory.enumeration.DatabaseImplTypes;
+import bbm.factory.InstanceFactory;
 import bbm.database.Database;
 import bbm.SalesRecord.SalesRecord;
 import bbm.model.account.Customer;
@@ -21,7 +21,7 @@ public final class DataManager implements IDataManager {
         if (dataManager == null) dataManager = new DataManager();
         return dataManager;
     }
-    Database db = InstanceFactory.getDatabaseInstance(DatabaseTypes.ListDatabase);
+    Database db = InstanceFactory.getDatabaseInstance(DatabaseImplTypes.ListDatabase);
 
     @Override
     public void addUser(Manager manager) {
