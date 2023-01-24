@@ -32,9 +32,12 @@ public final class SalesExecutiveController implements ISalesExecutiveController
     public List<MBike> viewAvailableMBike() {
         return salesExecutiveAccess.getAvailableMBike();
     }
-    public void viewReservedBike() {
-        UtilBikeView.printEBikeList(salesExecutiveAccess.getReservedEBike());
-        UtilBikeView.printMBikeList(salesExecutiveAccess.getReservedMBike());
+
+    public List<MBike> viewReservedMBike() {
+        return salesExecutiveAccess.getReservedMBike();
+    }
+    public List<EBike> viewReservedEBike() {
+        return salesExecutiveAccess.getReservedEBike();
     }
 
     public boolean confirmBikeBooking() {

@@ -5,6 +5,7 @@ import bbm.utility.UserView.UtilManagerView;
 import bbm.utility.UserView.UtilOwnerView;
 import bbm.utility.UserView.UtilSalesExecutiveView;
 import bbm.utility.UtilBikeView;
+import bbm.utility.UtilOrderDetailsView;
 import bbm.utility.UtilUserInput;
 
 import bbm.model.account.*;
@@ -95,8 +96,9 @@ public final class OwnerView implements IOwnerView{
                     UtilBikeView.printEBikeList(ownerController.viewAvailableEBike());
                     break ;
                 case VIEW_SOLD_DETAILS:
-                    ownerController.viewSoldDetails();
-                    ownerController.viewSoldBike();
+                    UtilOrderDetailsView.viewOrderDetails(ownerController.viewSoldDetails());
+                    UtilBikeView.printMBikeList(ownerController.viewSoldMBike());
+                    UtilBikeView.printEBikeList(ownerController.viewSoldEBike());
                     break;
                 case VIEW_PERSONAL_DETAILS:
                     UtilOwnerView.showOwnerDetail(ownerController.showPersonalDetails());

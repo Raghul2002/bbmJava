@@ -11,6 +11,8 @@ public interface ISalesExecutiveController {
     List<SalesExecutive> showPersonalDetails() ;
     List<EBike> viewAvailableEBike();
     List<MBike> viewAvailableMBike();
-    void viewReservedBike();
+    List<MBike> viewReservedMBike();
+    List<EBike> viewReservedEBike();
+
     boolean confirmBikeBooking();
 }

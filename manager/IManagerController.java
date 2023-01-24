@@ -1,5 +1,6 @@
 package bbm.manager;
 
+import bbm.SalesRecord.SalesRecord;
 import bbm.model.account.Manager;
 import bbm.model.bike.EBike;
 import bbm.model.bike.MBike;
@@ -19,6 +20,7 @@ public interface IManagerController {
     boolean removeMBike(int bikeId);
 
     boolean removeEBike(int bikeId);
-    void viewSoldDetails();
-    void viewSoldBike();
+    List<SalesRecord> viewSoldDetails();
+    List<MBike> viewSoldMBike();
+    List<EBike> viewSoldEBike();
 }

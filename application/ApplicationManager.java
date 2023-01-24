@@ -186,7 +186,6 @@ public final class ApplicationManager implements OwnerAccess, ManagerAccess, Cus
                 bikes.add(getBike(salesRecord.getBikeId()));
             }
         }
-        System.out.println(bikes.get(0).getBikeModel());
         return bikes;
     }
 

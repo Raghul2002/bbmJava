@@ -1,5 +1,6 @@
 package bbm.owner;
 
+import bbm.SalesRecord.SalesRecord;
 import bbm.application.OwnerAccess;
 import bbm.model.account.*;
 import bbm.model.bike.EBike;
@@ -64,12 +65,16 @@ public final class OwnerController implements IOwnerController{
         return ownerAccess.getAvailableMBike();
     }
 
-    public void viewSoldDetails() {
-        UtilOrderDetailsView.viewOrderDetails(ownerAccess.getSoldDetails());
+    public List<SalesRecord> viewSoldDetails() {
+        return (ownerAccess.getSoldDetails());
     }
 
-    public void viewSoldBike() {
-        UtilBikeView.printEBikeList(ownerAccess.getSoldEBike());
-        UtilBikeView.printMBikeList(ownerAccess.getSoldMBike());
+    public List<EBike> viewSoldEBike() {
+        return ownerAccess.getSoldEBike();
     }
+    public List<MBike> viewSoldMBike() {
+        return ownerAccess.getSoldMBike();
+    }
+
+
 }

@@ -9,7 +9,8 @@ public final class SalesExecutiveView implements ISalesExecutiveView{
     enum SalesExecutiveRoles {
         VIEW_AVAILABLE_MECHANICAL_BIKE,
         VIEW_AVAILABLE_ELECTRIC_BIKE,
-        VIEW_BIKE_ORDERS,
+        VIEW_MECHANICAL_BIKE_ORDERS,
+        VIEW_ELECTRICAL_BIKE_ORDERS,
         CONFIRM_BOOKING,
         VIEW_PERSONAL_DETAILS,
         LOGOUT,
@@ -35,9 +36,12 @@ public final class SalesExecutiveView implements ISalesExecutiveView{
                 case VIEW_AVAILABLE_ELECTRIC_BIKE:
                     UtilBikeView.printEBikeList(salesExecutiveController.viewAvailableEBike());
                     break ;
-                case VIEW_BIKE_ORDERS:
-                    salesExecutiveController.viewReservedBike();
+                case VIEW_MECHANICAL_BIKE_ORDERS:
+                    UtilBikeView.printMBikeList(salesExecutiveController.viewReservedMBike());
                     break;
+                case VIEW_ELECTRICAL_BIKE_ORDERS:
+                    UtilBikeView.printEBikeList(salesExecutiveController.viewReservedEBike());
+                    break ;
                 case CONFIRM_BOOKING:
                     if(salesExecutiveController.confirmBikeBooking())
                         System.out.println("Successfully Booked");

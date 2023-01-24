@@ -1,5 +1,6 @@
 package bbm.owner;
 
+import bbm.SalesRecord.SalesRecord;
 import bbm.model.account.Customer;
 import bbm.model.account.Manager;
 import bbm.model.account.Owner;
@@ -28,7 +29,8 @@ public interface IOwnerController {
 
     List<EBike> viewAvailableEBike();
     List<MBike> viewAvailableMBike();
-    void viewSoldDetails();
+    List<SalesRecord> viewSoldDetails();
 
-    void viewSoldBike();
+    List<EBike> viewSoldEBike();
+    List<MBike> viewSoldMBike();
 }

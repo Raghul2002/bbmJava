@@ -4,6 +4,7 @@ import bbm.model.bike.BikeTypes;
 import bbm.utility.UserView.UtilManagerView;
 import bbm.utility.UtilBikeInput;
 import bbm.utility.UtilBikeView;
+import bbm.utility.UtilOrderDetailsView;
 import bbm.utility.UtilUserInput;
 
 import java.util.Scanner;
@@ -84,8 +85,9 @@ public final class ManagerView implements IManagerView{
                     UtilBikeView.printEBikeList(managerController.viewAvailableEBike());
                     break ;
                 case VIEW_SOLD_DETAILS:
-                    managerController.viewSoldDetails();
-                    managerController.viewSoldBike();
+                    UtilOrderDetailsView.viewOrderDetails(managerController.viewSoldDetails());
+                    UtilBikeView.printMBikeList(managerController.viewSoldMBike());
+                    UtilBikeView.printEBikeList(managerController.viewSoldEBike());
                     break;
                 case VIEW_PERSONAL_DETAILS:
                     UtilManagerView.showManagerDetails(managerController.showPersonalDetails());
