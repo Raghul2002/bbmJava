@@ -39,7 +39,7 @@ public final class UtilBikeView {
 
     public static void printMBikeList(List<MBike> mBikeList) {
         if (mBikeList.isEmpty())
-            System.out.println("Sorry Currently no Mechanical bike available");
+            System.out.println("Currently no Mechanical bike available");
         else {
             System.out.println("Mechanical Bike :");
             mBikeHeader();
@@ -52,7 +52,7 @@ public final class UtilBikeView {
 
     public static void printEBikeList(List<EBike> eBikeList) {
         if (eBikeList.isEmpty())
-            System.out.println("Sorry Currently no Electric bike available");
+            System.out.println("Currently no Electric bike available");
         else {
             System.out.println("\nElectric Bike :");
             eBikeHeader();

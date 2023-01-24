@@ -1,11 +1,14 @@
 package bbm.salesExecutive;
 
+import bbm.utility.UserView.UtilSalesExecutiveView;
+import bbm.utility.UtilBikeView;
 import bbm.utility.UtilUserInput;
 
 public final class SalesExecutiveView implements ISalesExecutiveView{
     ISalesExecutiveController salesExecutiveController;
     enum SalesExecutiveRoles {
-        VIEW_BIKE,
+        VIEW_AVAILABLE_MECHANICAL_BIKE,
+        VIEW_AVAILABLE_ELECTRIC_BIKE,
         VIEW_BIKE_ORDERS,
         CONFIRM_BOOKING,
         VIEW_PERSONAL_DETAILS,
@@ -26,17 +29,23 @@ public final class SalesExecutiveView implements ISalesExecutiveView{
             String option = UtilUserInput.getNumberForSwitch(SalesExecutiveRoles.values().length);
             salesExecutiveRoles = SalesExecutiveRoles.values()[Integer.parseInt(option) - 1];
             switch (salesExecutiveRoles) {
-                case VIEW_BIKE:
-                    salesExecutiveController.viewAvailableBike();
+                case VIEW_AVAILABLE_MECHANICAL_BIKE:
+                    UtilBikeView.printMBikeList(salesExecutiveController.viewAvailableMBike());
                     break;
+                case VIEW_AVAILABLE_ELECTRIC_BIKE:
+                    UtilBikeView.printEBikeList(salesExecutiveController.viewAvailableEBike());
+                    break ;
                 case VIEW_BIKE_ORDERS:
                     salesExecutiveController.viewReservedBike();
                     break;
                 case CONFIRM_BOOKING:
-                    salesExecutiveController.confirmBikeBooking();
+                    if(salesExecutiveController.confirmBikeBooking())
+                        System.out.println("Successfully Booked");
+                    else
+                        System.out.println("Sorry Currently No Bike Available for booking");
                     break;
                 case VIEW_PERSONAL_DETAILS:
-                    salesExecutiveController.showPersonalDetails();
+                    UtilSalesExecutiveView.showSalesExecutiveDetails(salesExecutiveController.showPersonalDetails());
                     break;
                 case LOGOUT:
                     System.out.println("Logged out successfully !!");

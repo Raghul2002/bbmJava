@@ -1,7 +1,9 @@
 package bbm.manager;
 
 import bbm.model.bike.BikeTypes;
+import bbm.utility.UserView.UtilManagerView;
 import bbm.utility.UtilBikeInput;
+import bbm.utility.UtilBikeView;
 import bbm.utility.UtilUserInput;
 
 import java.util.Scanner;
@@ -10,7 +12,9 @@ public final class ManagerView implements IManagerView{
     enum ManagerRoles {
         ADD_BIKE,
         REMOVE_BIKE,
-        VIEW_BIKE,
+        VIEW_AVAILABLE_MECHANICAL_BIKE,
+        VIEW_AVAILABLE_ELECTRIC_BIKE,
+        VIEW_SOLD_DETAILS,
         VIEW_PERSONAL_DETAILS,
         LOGOUT,
     }
@@ -73,11 +77,18 @@ public final class ManagerView implements IManagerView{
                             break;
                     }
                     break;
-                case VIEW_BIKE:
-                    managerController.viewAvailableBike();
+                case VIEW_AVAILABLE_MECHANICAL_BIKE:
+                    UtilBikeView.printMBikeList(managerController.viewAvailableMBike());
+                    break;
+                case VIEW_AVAILABLE_ELECTRIC_BIKE:
+                    UtilBikeView.printEBikeList(managerController.viewAvailableEBike());
+                    break ;
+                case VIEW_SOLD_DETAILS:
+                    managerController.viewSoldDetails();
+                    managerController.viewSoldBike();
                     break;
                 case VIEW_PERSONAL_DETAILS:
-                    managerController.showPersonalDetails();
+                    UtilManagerView.showManagerDetails(managerController.showPersonalDetails());
                     break;
                 case LOGOUT:
                     System.out.println("Logged out successfully !!");

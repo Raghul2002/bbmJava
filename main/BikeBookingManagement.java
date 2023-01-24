@@ -14,17 +14,17 @@ import bbm.model.bike.MBike;
 public final class BikeBookingManagement {
     static {
         Database db = InstanceFactory.getDatabaseInstance(DatabaseImplTypes.ListDatabase);
-        assert db != null;
-        db.addUser(new Manager("m", "m", "manager", "r", "@gmail", "3456234234L"));
-        db.addUser(new Owner("m", "m", "owner", "t", "@gmail", "3456234234L"));
-        db.addUser(new Customer("m", "m", "customer", "h", "@gmail", "3456234234L"));
-        db.addUser(new SalesExecutive("m", "m", "sales", "x", "@gmail", "3456234234L"));
-        db.addBike(new MBike(1, 2, 3, 4, 5, "1", "2", "3", "4", 5, 1, "2", "3", "4", "5", "3"));
-        db.addBike(new MBike(1, 2, 3, 4, 5, "1", "2", "3", "4", 5, 1, "2", "3", "4", "5", "3"));
-        db.addBike(new EBike(5, 4, 3, 2, 1, "5", "4", "3", "2", 1, 5, 4, 3, 2));
-        db.addBike(new EBike(5, 4, 3, 2, 1, "5", "4", "3", "2", 1, 5, 4, 3, 2));
+        if(db != null) {
+            db.addUser(new Manager("AAA", "M", "manager", "r", "manager@gmail.com", "3456234234L"));
+            db.addUser(new Owner("BBB", "O", "owner", "t", "owner@gmail.com", "3423434562L"));
+            db.addUser(new Customer("CCC", "C", "customer", "h", "customer@gmail.com", "3423456234L"));
+            db.addUser(new SalesExecutive("DDD", "S", "sales", "x", "sales@gmail.com", "2343456234L"));
+            db.addBike(new MBike(110, 165, 2, 13, 114000, "FZS-V3", "Sports Bikes", "Digital", "Single Seat", 50, 1, "4-stroke", "149 cc", "Air Cooled", "Fuel Injection", "5 Speed"));
+            db.addBike(new MBike(95, 145, 1, 8, 71502, "DIO", "Scooter", "Analog", "Single", 48, 1, "4-stroke", "110 cc", "Air Cooled", "Fuel Injection", "-"));
+            db.addBike(new EBike(42, 120, 1, 2, 1, "Optima CX", "Scooter", "Digital", "Single", 30, 37, 42, 1800, 7));
+            db.addBike(new EBike(60, 125, 2, 2, 1, "Magnus EX", "Scooter", "Analog", "Split", 40, 50, 60, 2100, 10));
+        }
     }
-
     public static void main(String[] args) {
         BBMAccess bbmAccess = InstanceFactory.getBBMAccessInstance(BBMAccessImplTypes.ApplicationManager);
         IBBMController bbmController = InstanceFactory.getBBMControllerInstance(BBMControllerImplTypes.BBMController,bbmAccess);

@@ -1,18 +1,24 @@
 package bbm.manager;
 
+import bbm.model.account.Manager;
 import bbm.model.bike.EBike;
 import bbm.model.bike.MBike;
+
+import java.util.List;
 
 public interface IManagerController {
     void addBike(MBike mBike);
 
     void addBike(EBike eBike);
 
-    void viewAvailableBike();
+    List<EBike> viewAvailableEBike();
+    List<MBike> viewAvailableMBike();
 
-    void showPersonalDetails();
+    List<Manager> showPersonalDetails();
 
     boolean removeMBike(int bikeId);
 
     boolean removeEBike(int bikeId);
+    void viewSoldDetails();
+    void viewSoldBike();
 }

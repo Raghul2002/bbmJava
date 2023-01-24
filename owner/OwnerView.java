@@ -2,7 +2,9 @@ package bbm.owner;
 
 import bbm.utility.UserView.UtilCustomerView;
 import bbm.utility.UserView.UtilManagerView;
+import bbm.utility.UserView.UtilOwnerView;
 import bbm.utility.UserView.UtilSalesExecutiveView;
+import bbm.utility.UtilBikeView;
 import bbm.utility.UtilUserInput;
 
 import bbm.model.account.*;
@@ -22,10 +24,10 @@ public final class OwnerView implements IOwnerView{
         VIEW_MANAGER_DETAILS,
         VIEW_SALES_EXECUTIVE_DETAILS,
         VIEW_CUSTOMER_DETAILS,
-        VIEW_BIKE_DETAILS,
+        VIEW_AVAILABLE_MECHANICAL_BIKE,
+        VIEW_AVAILABLE_ELECTRIC_BIKE,
         VIEW_SOLD_DETAILS,
         VIEW_PERSONAL_DETAILS,
-        VIEW_SOLD_BIKE_DETAIL,
         LOGOUT,
     }
 
@@ -86,17 +88,18 @@ public final class OwnerView implements IOwnerView{
                     List<Customer> customerList = ownerController.getCustomerList();
                     UtilCustomerView.showCustomerDetails(customerList);
                     break;
-                case VIEW_BIKE_DETAILS:
-                    ownerController.viewAvailableBike();
+                case VIEW_AVAILABLE_MECHANICAL_BIKE:
+                    UtilBikeView.printMBikeList(ownerController.viewAvailableMBike());
                     break;
+                case VIEW_AVAILABLE_ELECTRIC_BIKE:
+                    UtilBikeView.printEBikeList(ownerController.viewAvailableEBike());
+                    break ;
                 case VIEW_SOLD_DETAILS:
                     ownerController.viewSoldDetails();
+                    ownerController.viewSoldBike();
                     break;
                 case VIEW_PERSONAL_DETAILS:
-                    ownerController.showPersonalDetails();
-                    break;
-                case VIEW_SOLD_BIKE_DETAIL:
-                    ownerController.viewSoldBike();
+                    UtilOwnerView.showOwnerDetail(ownerController.showPersonalDetails());
                     break;
                 case LOGOUT:
                     System.out.println("Logged out successfully !!");

@@ -2,6 +2,8 @@ package bbm.owner;
 
 import bbm.application.OwnerAccess;
 import bbm.model.account.*;
+import bbm.model.bike.EBike;
+import bbm.model.bike.MBike;
 import bbm.utility.UserView.UtilOwnerView;
 import bbm.utility.UtilBikeView;
 import bbm.utility.UtilOrderDetailsView;
@@ -47,15 +49,19 @@ public final class OwnerController implements IOwnerController{
         return ownerAccess.getCustomerList();
     }
 
-    public void showPersonalDetails() {
+    public List<Owner> showPersonalDetails() {
         List<Owner> userList = new ArrayList<>();
         userList.add(owner);
-        UtilOwnerView.showOwnerDetail(userList);
+        return (userList);
     }
 
-    public void viewAvailableBike() {
-        UtilBikeView.printEBikeList(ownerAccess.getAvailableEBike());
-        UtilBikeView.printMBikeList(ownerAccess.getAvailableMBike());
+    public List<EBike> viewAvailableEBike() {
+        return ownerAccess.getAvailableEBike();
+    }
+
+    @Override
+    public List<MBike> viewAvailableMBike() {
+        return ownerAccess.getAvailableMBike();
     }
 
     public void viewSoldDetails() {

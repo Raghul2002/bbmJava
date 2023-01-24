@@ -2,10 +2,12 @@ package bbm.manager;
 
 import bbm.application.ManagerAccess;
 import bbm.model.account.Manager;
+import bbm.model.account.Owner;
 import bbm.model.bike.EBike;
 import bbm.model.bike.MBike;
 import bbm.utility.UserView.UtilManagerView;
 import bbm.utility.UtilBikeView;
+import bbm.utility.UtilOrderDetailsView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,15 +29,19 @@ public final class ManagerController implements IManagerController{
         managerAccess.addBike(eBike, manager);
     }
 
-    public void viewAvailableBike() {
-        UtilBikeView.printEBikeList(managerAccess.getAvailableEBike());
-        UtilBikeView.printMBikeList(managerAccess.getAvailableMBike());
+    public List<EBike> viewAvailableEBike() {
+        return managerAccess.getAvailableEBike();
     }
 
-    public void showPersonalDetails() {
+    @Override
+    public List<MBike> viewAvailableMBike() {
+        return managerAccess.getAvailableMBike();
+    }
+
+    public List<Manager> showPersonalDetails() {
         List<Manager> userList = new ArrayList<>();
         userList.add(manager);
-        UtilManagerView.showManagerDetails(userList);
+        return (userList);
     }
 
     public boolean removeMBike(int bikeId) {
@@ -45,5 +51,12 @@ public final class ManagerController implements IManagerController{
     public boolean removeEBike(int bikeId) {
         return managerAccess.removeEBike(bikeId, manager);
     }
+    public void viewSoldDetails() {
+        UtilOrderDetailsView.viewOrderDetails(managerAccess.getSoldDetails());
+    }
 
+    public void viewSoldBike() {
+        UtilBikeView.printEBikeList(managerAccess.getSoldEBike());
+        UtilBikeView.printMBikeList(managerAccess.getSoldMBike());
+    }
 }

@@ -7,8 +7,6 @@ import bbm.application.CustomerAccess;
 import bbm.model.account.Customer;
 import bbm.model.bike.EBike;
 import bbm.model.bike.MBike;
-import bbm.utility.UserView.UtilCustomerView;
-import bbm.utility.UtilBikeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,18 +21,21 @@ public final class CustomerController implements ICustomerController {
     }
 
 
-    public void showPersonalDetails() {
+    public List<Customer> showPersonalDetails() {
         List<Customer> userList = new ArrayList<>();
         userList.add(this.customer);
-        UtilCustomerView.showCustomerDetails(userList);
+        return (userList);
     }
 
-    public void viewAvailableBike() {
-        UtilBikeView.printEBikeList(customerAccess.getAvailableEBike());
-        UtilBikeView.printMBikeList(customerAccess.getAvailableMBike());
+    @Override
+    public List<EBike> viewAvailableEBike() {
+        return customerAccess.getAvailableEBike();
     }
 
-
+    @Override
+    public List<MBike> viewAvailableMBike() {
+        return customerAccess.getAvailableMBike();
+    }
     public boolean compareBike(BikeTypes bikeType, int bikeId1, int bikeId2) {
         return customerAccess.compareBike(bikeType, bikeId1, bikeId2);
     }
@@ -43,13 +44,26 @@ public final class CustomerController implements ICustomerController {
         SalesRecord salesRecord = new SalesRecord(bikeId, customerId);
         return customerAccess.addBookingOrder(salesRecord, bikeType);
     }
-    public List<EBike> getCustomerEBikeStatus(){
-        List<Bike> bikeList = new ArrayList<>(customerAccess.getOwnedBike(customer.getCustomerId()));
-        bikeList.removeIf(bike -> bike instanceof MBike);
-        List<? extends Bike> eBikeList = new ArrayList<>(bikeList);
-        return null;
+    public List<MBike> getCustomerMBike(){
+        List<MBike> mBikeList = new ArrayList<>();
+        List<Bike> bikeList = new ArrayList<>(customerAccess.getCustomerBike(customer.getCustomerId()));
+        for(Bike bike :bikeList){
+            if(bike instanceof MBike){
+                mBikeList.add((MBike)bike);
+            }
+        }
+        return mBikeList;
     }
-    public List<MBike> getCustomerMBikeStatus(){
-        return null;
+
+    @Override
+    public List<EBike> getCustomerEBike() {
+        List<EBike> eBikeList = new ArrayList<>();
+        List<Bike> bikeList = new ArrayList<>(customerAccess.getCustomerBike(customer.getCustomerId()));
+        for(Bike bike :bikeList){
+            if(bike instanceof EBike){
+                eBikeList.add((EBike)bike);
+            }
+        }
+        return eBikeList;
     }
 }

@@ -67,18 +67,19 @@ public final class ApplicationManager implements OwnerAccess, ManagerAccess, Cus
         return null;
     }
 
-    public void confirmBookingOrders(SalesExecutive salesExecutive) {
+    public boolean confirmBookingOrders(SalesExecutive salesExecutive) {
         int bikeId ;
-        Bike bike = getBike(0);
+        Bike bike =null;
         for (SalesRecord salesRecord : dataManager.getSalesDetailsList()) {
             if (salesRecord.getSalesExecutiveId() == null) {
                 salesRecord.setSalesExecutiveId(salesExecutive.getSalesExecutiveId());
                 bikeId = salesRecord.getBikeId();
                 bike = getBike(bikeId);
+                if(bike != null)
+                    bike.setBikeStatus(BikeStatus.SOLD);
             }
         }
-        assert bike != null;
-        bike.setBikeStatus(BikeStatus.SOLD);
+        return bike != null;
     }
 
     @Override
@@ -177,14 +178,15 @@ public final class ApplicationManager implements OwnerAccess, ManagerAccess, Cus
     }
 
     @Override
-    public List<Bike> getOwnedBike(String customerId) {
+    public List<Bike> getCustomerBike(String customerId) {
         List<Bike> bikes = new ArrayList<>();
         List<SalesRecord> salesRecordList =  dataManager.getSalesDetailsList();
         for(SalesRecord salesRecord:salesRecordList){
-            if(salesRecord.getSalesExecutiveId().equals(customerId)){
+            if(salesRecord.getCustomerId().equals(customerId)){
                 bikes.add(getBike(salesRecord.getBikeId()));
             }
         }
+        System.out.println(bikes.get(0).getBikeModel());
         return bikes;
     }
 

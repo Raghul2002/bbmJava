@@ -12,5 +12,5 @@ public interface SalesExecutiveAccess {
     List<EBike> getAvailableEBike();
     List<MBike> getReservedMBike();
     List<EBike> getReservedEBike();
-    void confirmBookingOrders(SalesExecutive salesExecutive);
+    boolean confirmBookingOrders(SalesExecutive salesExecutive);
 }

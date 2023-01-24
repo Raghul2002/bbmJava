@@ -2,7 +2,11 @@ package bbm.owner;
 
 import bbm.model.account.Customer;
 import bbm.model.account.Manager;
+import bbm.model.account.Owner;
 import bbm.model.account.SalesExecutive;
+import bbm.model.bike.EBike;
+import bbm.model.bike.MBike;
+
 import java.util.List;
 
 public interface IOwnerController {
@@ -20,10 +24,10 @@ public interface IOwnerController {
 
     List<Customer> getCustomerList();
 
-    void showPersonalDetails();
+    List<Owner> showPersonalDetails();
 
-    void viewAvailableBike();
-
+    List<EBike> viewAvailableEBike();
+    List<MBike> viewAvailableMBike();
     void viewSoldDetails();
 
     void viewSoldBike();

@@ -2,6 +2,8 @@ package bbm.salesExecutive;
 
 import bbm.application.SalesExecutiveAccess;
 import bbm.model.account.SalesExecutive;
+import bbm.model.bike.EBike;
+import bbm.model.bike.MBike;
 import bbm.utility.UserView.UtilSalesExecutiveView;
 import bbm.utility.UtilBikeView;
 
@@ -17,22 +19,26 @@ public final class SalesExecutiveController implements ISalesExecutiveController
         this.salesExecutiveAccess = salesExecutiveAccess;
     }
 
-    public void showPersonalDetails() {
+    public List<SalesExecutive> showPersonalDetails() {
         List<SalesExecutive> userList = new ArrayList<>();
         userList.add(salesExecutive);
-        UtilSalesExecutiveView.showSalesExecutiveDetails(userList);
+        return (userList);
     }
-    public void viewAvailableBike() {
-        UtilBikeView.printEBikeList(salesExecutiveAccess.getAvailableEBike());
-        UtilBikeView.printMBikeList(salesExecutiveAccess.getAvailableMBike());
+    public List<EBike> viewAvailableEBike() {
+        return salesExecutiveAccess.getAvailableEBike();
+    }
+
+    @Override
+    public List<MBike> viewAvailableMBike() {
+        return salesExecutiveAccess.getAvailableMBike();
     }
     public void viewReservedBike() {
         UtilBikeView.printEBikeList(salesExecutiveAccess.getReservedEBike());
         UtilBikeView.printMBikeList(salesExecutiveAccess.getReservedMBike());
     }
 
-    public void confirmBikeBooking() {
-        salesExecutiveAccess.confirmBookingOrders(salesExecutive);
+    public boolean confirmBikeBooking() {
+        return salesExecutiveAccess.confirmBookingOrders(salesExecutive);
     }
 
 }

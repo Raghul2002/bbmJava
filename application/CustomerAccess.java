@@ -16,5 +16,5 @@ public interface CustomerAccess {
     boolean addBookingOrder(SalesRecord salesRecord, BikeTypes bikeType);
 
     boolean compareBike(BikeTypes bikeType, int bikeId1, int bikeId2);
-    List<Bike> getOwnedBike(String customerID);
+    List<Bike> getCustomerBike(String customerID);
 }
