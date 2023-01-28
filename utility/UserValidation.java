@@ -16,6 +16,10 @@ public final class Validation {
         String regex = "[a-zA-Z\\s]{3,40}$";
         return validate(regex,string);
     }
+    public static boolean validateLastName(String string){
+        String regex = "[a-zA-Z\\s]{1,40}$";
+        return validate(regex,string);
+    }
 
     public static boolean validatePhoneNo(String number){
         String regex = "[0-9]{10}$";
@@ -32,5 +36,13 @@ public final class Validation {
             return Integer.parseInt(num) <= length;
         }
         return false;
+    }
+    public static boolean validatePassword(String password){
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#\\$%\\^&\\*])[a-zA-Z\\d!@#\\$%\\^&\\*]{8,}$";
+        return validate(regex,password);
+    }
+    public static boolean validateUserName(String userName){
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{5,}$";
+        return validate(regex,userName);
     }
 }
